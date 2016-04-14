@@ -34,3 +34,4 @@ class Provider(models.Model):
     class Meta:
         verbose_name = 'Provedor'
         verbose_name_plural = 'Provedores'
+        ordering = ['name']
