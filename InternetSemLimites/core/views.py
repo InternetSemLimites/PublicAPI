@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView
 from InternetSemLimites.core.forms import ProviderForm
 from InternetSemLimites.core.mixins import EmailCreateView
@@ -63,6 +63,16 @@ def regional_fame(request, region):
 
 def regional_shame(request, region):
     return regional_hall_of(request, region, Provider.SHAME)
+
+
+def readme(request):
+    ctx = dict()
+    for state in State.objects.all():
+        providers = state.provider_set.filter(category=Provider.FAME,
+                                              published=True)
+        if providers:
+            ctx[state.name] = list(providers)
+    return render(request, 'core/readme.md', {'states': ctx})
 
 
 def _serialize(query):

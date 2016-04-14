@@ -1,18 +1,18 @@
 # Internet Sem Limites - CMS 
 
-[CMS](https://internetsemlimites.herokuapp.com) for [InternetSemLimites](https://github.com/jlcarvalho/InternetSemLimites) colaborative list.
+[CMS](https://internetsemlimites.herokuapp.com) for [InternetSemLimites](https://github.com/InternetSemLimites/InternetSemLimites) colaborative list.
 
-Entry points for JSON data:
+## Entry points
 
-
-* [All providers `/`](https://internetsemlimites.herokuapp.com/)
-* [Hall of Fame `/fame/`](https://internetsemlimites.herokuapp.com/fame/)
-* [Hall of Shame `/shame/`](https://internetsemlimites.herokuapp.com/shame/)
-* [By state `/<state abbreviation>/`](https://internetsemlimites.herokuapp.com/sc/)
-* [Hall of Fame by region `/<state abbreviation>/fame/`](https://internetsemlimites.herokuapp.com/sc/fame/) 
-* [Hall of Shame by region `/<state abbreviation>/shame/`](https://internetsemlimites.herokuapp.com/sc/shame/)
-
-Entry point to create new providers: [`/new`](https://internetsemlimites.herokuapp.com/new/)
+* Create new providers: [`/new`](https://internetsemlimites.herokuapp.com/new/)
+* Auto generated `README.md` ([main repository](https://github.com/InternetSemLimites/InternetSemLimites)): [`/README.md`](https://internetsemlimites.herokuapp.com/README.md)
+* API (JSON data):
+* * [All providers `/`](https://internetsemlimites.herokuapp.com/)
+* * [Hall of Fame `/fame/`](https://internetsemlimites.herokuapp.com/fame/)
+* * [Hall of Shame `/shame/`](https://internetsemlimites.herokuapp.com/shame/)
+* * [By state `/<state abbreviation>/`](https://internetsemlimites.herokuapp.com/sc/)
+* * [Hall of Fame by region `/<state abbreviation>/fame/`](https://internetsemlimites.herokuapp.com/sc/fame/) 
+* * [Hall of Shame by region `/<state abbreviation>/shame/`](https://internetsemlimites.herokuapp.com/sc/shame/)
 
 ## Install
 
