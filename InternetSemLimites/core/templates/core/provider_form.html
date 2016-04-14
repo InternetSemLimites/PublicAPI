@@ -10,11 +10,15 @@
     {{ form.non_field_errors }}
   </div><!-- div.form-group -->
 
+  <hr>
+
   <div class="form-group">
     <label for="{{ form.category.id_for_label }}">{{ form.category.label }}</label>
     {{ form.category.errors }}
     {{ form.category }}
   </div><!-- div.form-group -->
+
+  <hr>
 
   <div class="form-group">
     <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
@@ -28,8 +32,21 @@
     {{ form.url }}
   </div><!-- div.form-group -->
 
+  <hr>
+
   <div class="form-group">
     <label for="{{ form.source.id_for_label }}">{{ form.source.label }}</label>
+    <span class="help-block">
+      Algum link (redes sociais, nóticia etc.) onde a empresa se manifestou
+      afirmando que <strong>não irá</strong> adotar os limites de franquia
+      (isso é diferente de um link dizendo que ela não adota, 
+      <emphasis>hoje<emphasis>, essas medidas).
+    </span>
+    <span class="help-block">
+      De preferência salve o link no
+      <a href="http://archive.is">archive.is</a> e já coloque aqui o link que
+      eles fornecerem.
+    </span>
     {{ form.source.errors }}
     {{ form.source }}
   </div><!-- div.form-group -->
@@ -42,11 +59,18 @@
     </div>
   </div><!-- div.form-group -->
 
+  <hr>
+
   <div class="form-group">
     <label for="{{ form.other.id_for_label }}">{{ form.other.label }}</label>
     {{ form.other.errors }}
     {{ form.other }}
+    <span class="help-block">
+      Por exemplo, cidade ou regiões atendidas pelo provedor.
+    </span>
   </div><!-- div.form-group -->
+
+  <hr>
 
   {% csrf_token %}
   <button type="submit" class="btn btn-default">Enviar</button>
