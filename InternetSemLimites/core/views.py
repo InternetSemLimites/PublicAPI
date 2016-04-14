@@ -1,5 +1,8 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.views.generic import DetailView
+from InternetSemLimites.core.forms import ProviderForm
+from InternetSemLimites.core.mixins import EmailCreateView
 from InternetSemLimites.core.models import Provider, State
 
 HEADERS = {'category': '`F` for `Hall of Fame` or `S` for `Hall of Shame',
@@ -9,6 +12,11 @@ HEADERS = {'category': '`F` for `Hall of Fame` or `S` for `Hall of Shame',
            'url': 'URL of the provider',
            'created_at': 'Dated the ISP info was submitted to our server',
            'other': 'General information (eg cities covered)'}
+
+provider_new = EmailCreateView.as_view(model=Provider, form_class=ProviderForm,
+                                       email_subject='+1 InternetSemLimites')
+
+provider_details = DetailView.as_view(model=Provider)
 
 
 def home(request):

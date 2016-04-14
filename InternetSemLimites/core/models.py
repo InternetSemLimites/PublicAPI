@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import resolve_url
 
 
 class State(models.Model):
@@ -30,6 +31,9 @@ class Provider(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return resolve_url('provider', self.pk)
 
     class Meta:
         verbose_name = 'Provedor'

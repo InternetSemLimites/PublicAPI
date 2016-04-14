@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<form action="." method="post">
+
+  <h2>Adicionar um provedor</h2>
+
+  <div class="form-group">
+    {{ form.non_field_errors }}
+  </div><!-- div.form-group -->
+
+  <div class="form-group">
+    <label for="{{ form.category.id_for_label }}">{{ form.category.label }}</label>
+    {{ form.category.errors }}
+    {{ form.category }}
+  </div><!-- div.form-group -->
+
+  <div class="form-group">
+    <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+    {{ form.name.errors }}
+    {{ form.name }}
+  </div><!-- div.form-group -->
+
+  <div class="form-group">
+    <label for="{{ form.url.id_for_label }}">{{ form.url.label }}</label>
+    {{ form.url.errors }}
+    {{ form.url }}
+  </div><!-- div.form-group -->
+
+  <div class="form-group">
+    <label for="{{ form.source.id_for_label }}">{{ form.source.label }}</label>
+    {{ form.source.errors }}
+    {{ form.source }}
+  </div><!-- div.form-group -->
+
+  <div class="form-group">
+    <label for="{{ form.coverage.id_for_label }}">{{ form.coverage.label }}</label>
+    {{ form.coverage.errors }}
+    <div class="checkbox">
+      {{ form.coverage }}
+    </div>
+  </div><!-- div.form-group -->
+
+  <div class="form-group">
+    <label for="{{ form.other.id_for_label }}">{{ form.other.label }}</label>
+    {{ form.other.errors }}
+    {{ form.other }}
+  </div><!-- div.form-group -->
+
+  {% csrf_token %}
+  <button type="submit" class="btn btn-default">Enviar</button>
+
+</form>
+
+{% endblock %}

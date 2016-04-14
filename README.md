@@ -12,6 +12,8 @@ Entry points for JSON data:
 * [Hall of Fame by region `/<state abbreviation>/fame/`](https://internetsemlimites.herokuapp.com/sc/fame/) 
 * [Hall of Shame by region `/<state abbreviation>/shame/`](https://internetsemlimites.herokuapp.com/sc/shame/)
 
+Entry point to create new providers: [`/new`](https://internetsemlimites.herokuapp.com/new/)
+
 ## Install
 
 ### Requirements

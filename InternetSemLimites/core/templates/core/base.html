@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} | {% endif %}InternetSemLimites</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="jumbotron" style="margin-top: 3rem">`
+
+          <h1>InternetSemLimites</h1>
+
+          {% block content %}{% endblock %}
+
+        </div><!-- end div.jumbotron -->
+      </div><!-- end div.col-md-12 -->
+    </div><!-- end div.row -->
+  </div><!-- end div.container -->
+
+  <script>
+
+    var formFields = document.querySelectorAll('input, select');
+    for (var i = 0; i < formFields.length; i++) {
+      var fieldType = formFields[i].getAttribute('type');
+      if (fieldType !== 'checkbox') {
+        formFields[i].setAttribute('class', 'form-control');
+      }
+    }
+
+    var uls = document.querySelectorAll('ul');
+    for (var i = 0; i < uls.length; i++) {
+      uls[i].setAttribute('class', 'list-unstyled');
+    }
+
+    var errorLists = document.querySelectorAll('div.form-group > label + ul');
+    for (var i = 0; i < errorLists.length; i++) {
+      errorLists[i].parentNode.setAttribute('class', 'has-error form-group');
+      errorLists[i].setAttribute('class', 'list-unstyled text-danger');
+    }
+    
+  </script>
+
+</body>
+</html>
