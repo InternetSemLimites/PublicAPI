@@ -6,6 +6,7 @@ class ProviderModelAdmin(admin.ModelAdmin):
     list_display = ('name', 'states', 'published', 'category')
     actions = ['publish', 'unpublish', 'shame', 'fame']
     list_filter = ('published', 'created_at', 'category', 'coverage')
+    search_fields = ('name',)
 
     def states(self, obj):
         states = (state.abbr for state in obj.coverage.all())
