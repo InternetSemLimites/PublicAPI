@@ -9,8 +9,7 @@ Os dados estão disponíveis também em uma [API pública](http://github.com/cud
 
 | Provedor | Fonte | Observações |
 |----------|-------|-------------|{% for provider in providers %}
-| [{{ provider.name }}]({{ provider.url }}) | {{ provider.source }} |  {{ provider.other|default:"&nbsp;" }} |
-{% endfor %}
+| [{{ provider.name }}]({{ provider.url }}) | {{ provider.source }} |  {{ provider.other|default:"&nbsp;" }} |{% endfor %}
 {% endfor %}
 
 # Painel da Vergonha
