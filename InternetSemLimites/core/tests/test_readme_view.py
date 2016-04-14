@@ -21,6 +21,9 @@ class TestGet(TestCase):
     def test_get(self):
         self.assertEqual(200, self.resp.status_code)
 
+    def test_type(self):
+        self.assertEqual('text/markdown; charset=UTF-8', self.resp['Content-Type'])
+
     def test_template(self):
         self.assertTemplateUsed(self.resp, 'core/readme.md')
 

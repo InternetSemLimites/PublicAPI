@@ -37,5 +37,5 @@ urlpatterns = [
     url(r'^(?P<region>[\w]{2})/shame/$', regional_shame, name='regional_shame'),
     url(r'^new/$', provider_new, name='new'),
     url(r'^provider/(?P<pk>[\d]+)/$', provider_details, name='provider'),
-    url(r'^README.md/$', readme, name='readme'),
+    url(r'^README.md$', readme, name='readme'),
 ]

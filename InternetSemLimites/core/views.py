@@ -72,7 +72,8 @@ def readme(request):
                                               published=True)
         if providers:
             ctx[state.name] = list(providers)
-    return render(request, 'core/readme.md', {'states': ctx})
+    return render(request, 'core/readme.md', {'states': ctx},
+                  content_type='text/markdown; charset=UTF-8')
 
 
 def _serialize(query):
