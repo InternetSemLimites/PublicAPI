@@ -16,7 +16,7 @@ class TestGet(TestCase):
                  'published': True}
         provider = Provider.objects.create(**props)
         provider.coverage = [sc, go]
-        self.resp = self.client.get(resolve_url('home'))
+        self.resp = self.client.get(resolve_url('fame'))
 
     def test_get(self):
         self.assertEqual(200, self.resp.status_code)
@@ -26,11 +26,14 @@ class TestGet(TestCase):
 
     def test_contents(self):
         json_resp = self.resp.json()
-        providers = json_resp['providers']
+        fame = json_resp['providers']
         with self.subTest():
-            self.assertEqual('Xpto', providers[0]['name'])
-            self.assertEqual('http://xp.to', providers[0]['url'])
-            self.assertEqual('http://twitter.com/xpto', providers[0]['source'])
-            self.assertEqual(['GO', 'SC'], providers[0]['coverage'])
-            self.assertEqual('F', providers[0]['category'])
-            self.assertEqual('Lorem ipsum', providers[0]['other'])
+            self.assertEqual(1, len(fame))
+            self.assertNotIn('hall-of-shame', json_resp)
+            self.assertIn('headers', json_resp)
+            self.assertEqual('Xpto', fame[0]['name'])
+            self.assertEqual('http://xp.to', fame[0]['url'])
+            self.assertEqual('http://twitter.com/xpto', fame[0]['source'])
+            self.assertEqual(['GO', 'SC'], fame[0]['coverage'])
+            self.assertEqual('F', fame[0]['category'])
+            self.assertEqual('Lorem ipsum', fame[0]['other'])
