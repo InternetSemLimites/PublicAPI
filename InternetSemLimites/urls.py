@@ -15,11 +15,18 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from InternetSemLimites.core.views import home, hall_of_fame, hall_of_shame
+from InternetSemLimites.core.views import (home, hall_of_fame, hall_of_shame,
+                                           region, regional_fame,
+                                           regional_shame)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home, name='home'),
     url(r'^fame/$', hall_of_fame, name='fame'),
     url(r'^shame/$', hall_of_shame, name='shame'),
+    url(r'^region/(?P<region>[\w]{2})/fame/$',
+        regional_fame, name='regional_fame'),
+    url(r'^region/(?P<region>[\w]{2})/shame/$',
+        regional_shame, name='regional_shame'),
+    url(r'^region/(?P<region>[\w]{2})/$', region, name='region'),
 ]

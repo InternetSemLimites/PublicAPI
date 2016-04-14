@@ -1,6 +1,16 @@
 # Internet Sem Limites - CMS 
 
-[CMS](https://internetsemlimites.herokuapp.com) para a lista colaborativa [InternetSemLimites](https://github.com/jlcarvalho/InternetSemLimites).
+[CMS](https://internetsemlimites.herokuapp.com) for [InternetSemLimites](https://github.com/jlcarvalho/InternetSemLimites) colaborative list.
+
+Entry points for JSON data:
+
+
+* [All providers `/`](https://internetsemlimites.herokuapp.com/)
+* [Hall of Fame `/fame/`](https://internetsemlimites.herokuapp.com/fame/)
+* [Hall of Shame `/shame/`](https://internetsemlimites.herokuapp.com/shame/)
+* [By state `/region/<state abbreviation>/`](https://internetsemlimites.herokuapp.com/region/sc/)
+* [Hall of Fame by region `/region/<state abbreviation>/fame/`](https://internetsemlimites.herokuapp.com/region/sc/fame/) 
+* [Hall of Shame by region `/region/<state abbreviation>/shame/`](https://internetsemlimites.herokuapp.com/region/sc/shame/)
 
 ## Install
 

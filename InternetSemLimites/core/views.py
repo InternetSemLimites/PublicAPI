@@ -1,5 +1,6 @@
 from django.http import JsonResponse
-from InternetSemLimites.core.models import Provider
+from django.shortcuts import get_object_or_404
+from InternetSemLimites.core.models import Provider, State
 
 HEADERS = {'category': '`F` for `Hall of Fame` or `S` for `Hall of Shame',
            'source': 'URL for the source of the info(use archive.is)',
@@ -19,7 +20,14 @@ def home(request):
 
 
 def hall_of(request, fame_or_shame):
-    fame = _serialize(Provider.objects.filter(category=fame_or_shame))
+    providers = _serialize(Provider.objects.filter(category=fame_or_shame))
+    return JsonResponse({'providers': list(providers),
+                         'headers': HEADERS})
+
+
+def regional_hall_of(request, region, fame_or_shame):
+    region = get_object_or_404(State, abbr=region.upper())
+    fame = _serialize(region.provider_set.filter(category=fame_or_shame))
     return JsonResponse({'providers': list(fame),
                          'headers': HEADERS})
 
@@ -30,6 +38,23 @@ def hall_of_fame(request):
 
 def hall_of_shame(request):
     return hall_of(request, Provider.SHAME)
+
+
+def region(request, region):
+    region = get_object_or_404(State, abbr=region.upper())
+    fame = _serialize(region.provider_set.filter(category=Provider.FAME))
+    shame = _serialize(region.provider_set.filter(category=Provider.SHAME))
+    return JsonResponse({'hall-of-fame': list(fame),
+                         'hall-of-shame': list(shame),
+                         'headers': HEADERS})
+
+
+def regional_fame(request, region):
+    return regional_hall_of(request, region, Provider.FAME)
+
+
+def regional_shame(request, region):
+    return regional_hall_of(request, region, Provider.SHAME)
 
 
 def _serialize(query):
