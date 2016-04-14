@@ -6,6 +6,10 @@ Para cadastrar um novo provedor utilize [esse formulário](https://internetsemli
 
 Os dados estão disponíveis também em uma [API pública](http://github.com/cuducos/InternetSemLimitesCMS). Se você pensa em fazer algo, um site, um app, um SPA com os dados, [junte-se a nós](https://github.com/jlcarvalho/InternetSemLimites/issues/9).
 
+---
+This repo is focused on creating an open catalog of companies [who are not adhering to data cap in Brazil](http://www.zdnet.com/article/brazilians-protest-against-fixed-broadband-data-cap/).
+
+---
 {% for state_name, providers in states.items %}
 ## {{ state_name }}
 
