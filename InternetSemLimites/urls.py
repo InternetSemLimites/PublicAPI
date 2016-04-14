@@ -24,9 +24,7 @@ urlpatterns = [
     url(r'^$', home, name='home'),
     url(r'^fame/$', hall_of_fame, name='fame'),
     url(r'^shame/$', hall_of_shame, name='shame'),
-    url(r'^region/(?P<region>[\w]{2})/fame/$',
-        regional_fame, name='regional_fame'),
-    url(r'^region/(?P<region>[\w]{2})/shame/$',
-        regional_shame, name='regional_shame'),
-    url(r'^region/(?P<region>[\w]{2})/$', region, name='region'),
+    url(r'^(?P<region>[\w]{2})/$', region, name='region'),
+    url(r'^(?P<region>[\w]{2})/fame/$', regional_fame, name='regional_fame'),
+    url(r'^(?P<region>[\w]{2})/shame/$', regional_shame, name='regional_shame'),
 ]

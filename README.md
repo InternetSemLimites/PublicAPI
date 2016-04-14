@@ -8,9 +8,9 @@ Entry points for JSON data:
 * [All providers `/`](https://internetsemlimites.herokuapp.com/)
 * [Hall of Fame `/fame/`](https://internetsemlimites.herokuapp.com/fame/)
 * [Hall of Shame `/shame/`](https://internetsemlimites.herokuapp.com/shame/)
-* [By state `/region/<state abbreviation>/`](https://internetsemlimites.herokuapp.com/region/sc/)
-* [Hall of Fame by region `/region/<state abbreviation>/fame/`](https://internetsemlimites.herokuapp.com/region/sc/fame/) 
-* [Hall of Shame by region `/region/<state abbreviation>/shame/`](https://internetsemlimites.herokuapp.com/region/sc/shame/)
+* [By state `/<state abbreviation>/`](https://internetsemlimites.herokuapp.com/sc/)
+* [Hall of Fame by region `/<state abbreviation>/fame/`](https://internetsemlimites.herokuapp.com/sc/fame/) 
+* [Hall of Shame by region `/<state abbreviation>/shame/`](https://internetsemlimites.herokuapp.com/sc/shame/)
 
 ## Install
 
