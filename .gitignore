@@ -1,0 +1,6 @@
+.ropeproject/
+.DS_Store
+*.pyc
+*.sqlite3
+static/
+.env
