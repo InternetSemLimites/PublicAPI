@@ -6,8 +6,8 @@ from InternetSemLimites.core.models import Provider, State
 class TestGet(TestCase):
 
     def setUp(self):
-        sc = State.objects.create(name='Santa Catarina', abbr='SC')
-        go = State.objects.create(name='Goiás', abbr='GO')
+        sc = State.objects.get(abbr='SC')
+        go = State.objects.get(abbr='GO')
         props = {'name': 'Xpto',
                  'url': 'http://xp.to',
                  'source': 'http://twitter.com/xpto',
