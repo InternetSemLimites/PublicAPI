@@ -76,11 +76,17 @@ def readme(request):
                   content_type='text/markdown; charset=UTF-8')
 
 
+def hall_of_shame_md(request):
+    ctx = Provider.objects.filter(category=Provider.SHAME, published=True)
+    return render(request, 'core/hall_of_shame.md', dict(providers=ctx),
+                  content_type='text/markdown; charset=UTF-8')
+
+
 def _serialize(query):
     fields = [f.__str__().split('.')[-1] for f in Provider._meta.fields]
     fields.remove('id')
     for obj in query:
         if obj.published:
             output = {field: getattr(obj, field) for field in fields}
-            output['coverage'] = [state.abbr for state in obj.coverage.all()]
+            output['coverage'] = obj.coverage_to_list
             yield output

@@ -35,6 +35,10 @@ class Provider(models.Model):
     def get_absolute_url(self):
         return resolve_url('provider', self.pk)
 
+    @property
+    def coverage_to_list(self):
+        return [state.abbr for state in self.coverage.all()]
+
     class Meta:
         verbose_name = 'Provedor'
         verbose_name_plural = 'Provedores'

@@ -18,6 +18,7 @@ from django.contrib import admin
 from InternetSemLimites.core.views import (
     hall_of_fame,
     hall_of_shame,
+    hall_of_shame_md,
     home,
     provider_details,
     provider_new,
@@ -38,4 +39,5 @@ urlpatterns = [
     url(r'^new/$', provider_new, name='new'),
     url(r'^provider/(?P<pk>[\d]+)/$', provider_details, name='provider'),
     url(r'^README.md$', readme, name='readme'),
+    url(r'^HALL_OF_SHAME.md$', hall_of_shame_md, name='hall_of_shame'),
 ]

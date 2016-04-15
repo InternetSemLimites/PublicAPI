@@ -17,7 +17,7 @@ This repo is focused on creating an open catalog of companies [who are not adher
 
 | Provedor | Fonte | Observações |
 |----------|-------|-------------|{% for provider in providers %}
-| [{{ provider.name }}]({{ provider.url }}) | {{ provider.source }} |  {{ provider.other|default:"&nbsp;" }} |{% endfor %}
+| [{{ provider.name }}]({{ provider.url }}) | {{ provider.source }} | {{ provider.other|default:"&nbsp;" }} |{% endfor %}
 {% endfor %}
 
 # Painel da Vergonha
