@@ -1,13 +1,24 @@
 Mais um provedor foi enviado para o InternetSemLimites.
 
+
+
 Ele ainda não está no ar na API. Para isso alguém tem que marcar como
 “publicado”: http://internetsemlimites.herokuapp.com{% url 'home' %}admin/core/provider/{{ provider.pk }}/change/
 
+
+
 Categoria: Hall of {% if provider.category == 'F' %}F{% else %}Sh{% endif %}ame
+
 Nome do provedor: {{ provider.name }}
+
 URL do provedor: {{ provider.url }}
+
 URL da fonte da informação: {{ provider.source }}
+
 Cobertura: {{ provider.coverage.all|join:', ' }}
+
 Observações: {{ provider.other }}
+
 Publicado: {% if provider.published %}Sim}{% else %}Não{% endif %}
+
 Criado em: {{ provider.created_at }}
