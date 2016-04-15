@@ -12,8 +12,8 @@ Os dados estão disponíveis também em uma [API pública](http://github.com/cud
 This repo is focused on creating an open catalog of companies [who are not adhering to data cap in Brazil](http://www.zdnet.com/article/brazilians-protest-against-fixed-broadband-data-cap/).
 
 ---
-{% for state_name, providers in states.items %}
-## {{ state_name }}
+{% for state, providers in states %}
+## {{ state }}
 
 | Provedor | Fonte | Observações |
 |----------|-------|-------------|{% for provider in providers %}

@@ -66,13 +66,13 @@ def regional_shame(request, region):
 
 
 def readme(request):
-    ctx = dict()
+    states = list()
     for state in State.objects.all():
         providers = state.provider_set.filter(category=Provider.FAME,
                                               published=True)
         if providers:
-            ctx[state.name] = list(providers)
-    return render(request, 'core/readme.md', {'states': ctx},
+            states.append((state.name, list(providers)))
+    return render(request, 'core/readme.md', {'states': states},
                   content_type='text/markdown; charset=UTF-8')
 
 
