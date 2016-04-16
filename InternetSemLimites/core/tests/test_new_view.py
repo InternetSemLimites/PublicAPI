@@ -22,7 +22,6 @@ class TestGet(TestCase):
 
     def test_contents(self):
         tags = (('<form', 1),
-                ('<input', 32),
                 ('<select ', 1),
                 ('type="text"', 2),
                 ('type="url"', 2))
@@ -42,8 +41,8 @@ class TestPostValid(TestCase):
 
     def setUp(self):
         User.objects.create_superuser(username='two', password='', email='42@xp.to')
-        sc = State.objects.get(abbr='SC')
-        go = State.objects.get(abbr='GO')
+        sc, *_ = State.objects.get_or_create(abbr='SC', name='Santa Catarina')
+        go, *_ = State.objects.get_or_create(abbr='GO', name='Goiás')
         data = {'name': 'Xpto',
                 'url': 'http://xp.to',
                 'source': 'http://twitter.com/xpto',

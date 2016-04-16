@@ -11,8 +11,8 @@ class TestValidPost(TestCase):
         User.objects.create_user(username='one', password='', email='xpto@xp.to')
         User.objects.create_superuser(username='two', password='', email='42@xp.to')
         User.objects.create_superuser(username='three', password='', email='hell@ye.ah')
-        sc = State.objects.get(abbr='SC')
-        go = State.objects.get(abbr='GO')
+        sc, *_ = State.objects.get_or_create(abbr='SC', name='Santa Catarina')
+        go, *_ = State.objects.get_or_create(abbr='GO', name='Goiás')
         data = {'name': 'Xpto',
                 'url': 'http://xp.to',
                 'source': 'http://twitter.com/xpto',

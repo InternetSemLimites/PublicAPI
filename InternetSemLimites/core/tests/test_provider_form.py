@@ -19,8 +19,8 @@ class TestProviderForm(TestCase):
         self.assertFalse(form.errors)
 
     def _valid_form(self, **kwargs):
-        sc = State.objects.get(abbr='SC')
-        go = State.objects.get(abbr='GO')
+        sc, *_ = State.objects.get_or_create(abbr='SC', name='Santa Catarina')
+        go, *_ = State.objects.get_or_create(abbr='GO', name='Goiás')
         valid = {'name': 'Xpto',
                  'url': 'http://xp.to',
                  'source': 'http://twitter.com/xpto',

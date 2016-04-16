@@ -6,8 +6,8 @@ from InternetSemLimites.core.models import Provider, State
 class TestGet(TestCase):
 
     def setUp(self):
-        sc = State.objects.get(abbr='SC')
-        go = State.objects.get(abbr='GO')
+        sc, *_ = State.objects.get_or_create(abbr='SC', name='Santa Catarina')
+        go, *_ = State.objects.get_or_create(abbr='GO', name='Goiás')
         props = {'name': 'Xpto',
                  'url': 'http://xp.to',
                  'source': 'http://twitter.com/xpto',
@@ -16,7 +16,7 @@ class TestGet(TestCase):
                  'published': True}
         provider = Provider.objects.create(**props)
         provider.coverage = [sc, go]
-        self.resp = self.client.get(resolve_url('regional_fame', region='GO'))
+        self.resp = self.client.get(resolve_url('regional_fame', 'GO'))
 
     def test_get(self):
         self.assertEqual(200, self.resp.status_code)
