@@ -41,7 +41,7 @@ class EmailCreateMixin:
         return self.object._meta.model_name
 
     def get_email_to(self):
-        for user in User.objects.all():
+        for user in User.objects.exclude(email=''):
             if user.is_superuser:
                 yield user.email
 
