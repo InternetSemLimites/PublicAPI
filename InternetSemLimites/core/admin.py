@@ -3,9 +3,9 @@ from InternetSemLimites.core.models import Provider
 
 
 class ProviderModelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'states', 'published', 'category')
-    actions = ['publish', 'unpublish', 'shame', 'fame']
-    list_filter = ('published', 'created_at', 'category', 'coverage')
+    list_display = ('name', 'states', 'status', 'category')
+    actions = ['publish', 'unpublish', 'refuse', 'shame', 'fame']
+    list_filter = ('status', 'created_at', 'category', 'coverage')
     search_fields = ('name',)
 
     def states(self, obj):
@@ -15,7 +15,7 @@ class ProviderModelAdmin(admin.ModelAdmin):
     states.short_description = 'Cobertura'
 
     def publish(self, request, queryset):
-        count = queryset.update(published=True)
+        count = queryset.update(status=Provider.PUBLISHED)
         if count < 2:
             msg = '{} provedores publicados.'
         else:
@@ -24,15 +24,25 @@ class ProviderModelAdmin(admin.ModelAdmin):
 
     publish.short_description = 'Publicar'
 
-    def unpublish(self, request, queryset):
-        count = queryset.update(published=False)
+    def refuse(self, request, queryset):
+        count = queryset.update(status=Provider.REFUSED)
         if count < 2:
             msg = '{} provedores tirados do ar.'
         else:
             msg = '{} provedor tirado do ar.'
         self.message_user(request, msg.format(count))
 
-    unpublish.short_description = 'Tirar do ar'
+    refuse.short_description = 'Tirar do ar'
+
+    def unpublish(self, request, queryset):
+        count = queryset.update(status=Provider.DISCUSSION)
+        if count < 2:
+            msg = '{} provedores recolocados em discussão.'
+        else:
+            msg = '{} provedor recolocado em discussão.'
+        self.message_user(request, msg.format(count))
+
+    unpublish.short_description = 'Voltar para discussão'
 
     def shame(self, request, queryset):
         count = queryset.update(category=Provider.SHAME)

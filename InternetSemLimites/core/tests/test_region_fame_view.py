@@ -13,7 +13,7 @@ class TestGet(TestCase):
                  'source': 'http://twitter.com/xpto',
                  'category': Provider.FAME,
                  'other': 'Lorem ipsum',
-                 'published': True}
+                 'status': Provider.PUBLISHED}
         provider = Provider.objects.create(**props)
         provider.coverage = [sc, go]
         self.resp = self.client.get(resolve_url('regional_fame', 'GO'))

@@ -18,5 +18,5 @@ class TestProviderModel(TestCase):
     def test_create(self):
         self.assertTrue(Provider.objects.exists())
 
-    def test_published_is_false_by_default(self):
-        self.assertFalse(self.provider.published)
+    def test_status(self):
+        self.assertEqual(Provider.NEW, self.provider.status)

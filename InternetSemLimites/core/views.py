@@ -20,64 +20,57 @@ provider_details = DetailView.as_view(model=Provider)
 
 
 def home(request):
-    fame = _serialize(Provider.objects.filter(category=Provider.FAME))
-    shame = _serialize(Provider.objects.filter(category=Provider.SHAME))
+    fame = _serialize(Provider.objects.fame())
+    shame = _serialize(Provider.objects.shame())
     return JsonResponse({'hall-of-fame': list(fame),
                          'hall-of-shame': list(shame),
-                         'headers': HEADERS})
-
-
-def hall_of(request, fame_or_shame):
-    providers = _serialize(Provider.objects.filter(category=fame_or_shame))
-    return JsonResponse({'providers': list(providers),
-                         'headers': HEADERS})
-
-
-def regional_hall_of(request, region, fame_or_shame):
-    region = get_object_or_404(State, abbr=region.upper())
-    fame = _serialize(region.provider_set.filter(category=fame_or_shame))
-    return JsonResponse({'providers': list(fame),
                          'headers': HEADERS})
 
 
 def hall_of_fame(request):
-    return hall_of(request, Provider.FAME)
+    providers = _serialize(Provider.objects.fame())
+    return JsonResponse({'providers': list(providers),
+                         'headers': HEADERS})
 
 
 def hall_of_shame(request):
-    return hall_of(request, Provider.SHAME)
+    providers = _serialize(Provider.objects.shame())
+    return JsonResponse({'providers': list(providers),
+                         'headers': HEADERS})
 
 
-def region(request, region):
-    region = get_object_or_404(State, abbr=region.upper())
-    fame = _serialize(region.provider_set.filter(category=Provider.FAME))
-    shame = _serialize(region.provider_set.filter(category=Provider.SHAME))
+def region(request, abbr):
+    state = get_object_or_404(State, abbr=abbr.upper())
+    fame = _serialize(state.provider_set.fame())
+    shame = _serialize(state.provider_set.shame())
     return JsonResponse({'hall-of-fame': list(fame),
                          'hall-of-shame': list(shame),
                          'headers': HEADERS})
 
 
-def regional_fame(request, region):
-    return regional_hall_of(request, region, Provider.FAME)
+def regional_fame(request, abbr):
+    state = get_object_or_404(State, abbr=abbr.upper())
+    providers = _serialize(state.provider_set.fame())
+    return JsonResponse({'providers': list(providers),
+                         'headers': HEADERS})
 
 
-def regional_shame(request, region):
-    return regional_hall_of(request, region, Provider.SHAME)
+def regional_shame(request, abbr):
+    state = get_object_or_404(State, abbr=abbr.upper())
+    providers = _serialize(state.provider_set.shame())
+    return JsonResponse({'providers': list(providers),
+                         'headers': HEADERS})
 
 
 def readme(request):
-    states = list()
-    for state in State.objects.all():
-        providers = state.provider_set.filter(category=Provider.FAME,
-                                              published=True)
-        if providers:
-            states.append((state.name, list(providers)))
-    return render(request, 'core/readme.md', {'states': states},
+    states = State.objects.exclude(provider=None)
+    ctx = [(state.name, list(state.provider_set.fame())) for state in states]
+    return render(request, 'core/readme.md', {'states': ctx},
                   content_type='text/markdown; charset=UTF-8')
 
 
 def hall_of_shame_md(request):
-    ctx = Provider.objects.filter(category=Provider.SHAME, published=True)
+    ctx = Provider.objects.shame()
     return render(request, 'core/hall_of_shame.md', dict(providers=ctx),
                   content_type='text/markdown; charset=UTF-8')
 
@@ -86,7 +79,6 @@ def _serialize(query):
     fields = [f.__str__().split('.')[-1] for f in Provider._meta.fields]
     fields.remove('id')
     for obj in query:
-        if obj.published:
-            output = {field: getattr(obj, field) for field in fields}
-            output['coverage'] = obj.coverage_to_list
-            yield output
+        output = {field: getattr(obj, field) for field in fields}
+        output['coverage'] = obj.coverage_to_list
+        yield output

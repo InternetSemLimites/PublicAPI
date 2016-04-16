@@ -27,7 +27,7 @@ class TestProviderForm(TestCase):
                  'coverage': [sc.pk, go.pk],
                  'category': Provider.SHAME,
                  'other': 'Lorem ipsum',
-                 'published': True}
+                 'status': Provider.PUBLISHED}
         form = ProviderForm(dict(valid, **kwargs))
         form.is_valid()
         return form
