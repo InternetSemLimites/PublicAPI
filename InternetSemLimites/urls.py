@@ -13,31 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib import admin
-from InternetSemLimites.core.views import (
-    hall_of_fame,
-    hall_of_shame,
-    hall_of_shame_md,
-    home,
-    provider_details,
-    provider_new,
-    readme,
-    region,
-    regional_fame,
-    regional_shame
-)
+from InternetSemLimites.core.views import (redirect_to_api, provider_details,
+                                           provider_new)
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', home, name='home'),
-    url(r'^fame/$', hall_of_fame, name='fame'),
-    url(r'^shame/$', hall_of_shame, name='shame'),
-    url(r'^(?P<abbr>[\w]{2})/$', region, name='region'),
-    url(r'^(?P<abbr>[\w]{2})/fame/$', regional_fame, name='regional_fame'),
-    url(r'^(?P<abbr>[\w]{2})/shame/$', regional_shame, name='regional_shame'),
+    url(r'^$', redirect_to_api, name='home'),
+    url(r'^api/', include('InternetSemLimites.api.urls', namespace='api')),
+    url(r'^markdown/', include('InternetSemLimites.markdown.urls', namespace='markdown')),
     url(r'^new/$', provider_new, name='new'),
     url(r'^provider/(?P<pk>[\d]+)/$', provider_details, name='provider'),
-    url(r'^README.md$', readme, name='readme'),
-    url(r'^HALL_OF_SHAME.md$', hall_of_shame_md, name='hall_of_shame'),
 ]

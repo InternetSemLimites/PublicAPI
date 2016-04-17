@@ -1,6 +1,7 @@
-.ropeproject/
-.DS_Store
 *.pyc
 *.sqlite3
-static/
+.DS_Store
 .env
+.ropeproject/
+__pycache__/
+static/

@@ -1,3 +1,4 @@
+import re
 from django.db import models
 from django.shortcuts import resolve_url
 from InternetSemLimites.core.managers import ProviderManager
@@ -20,6 +21,7 @@ class Provider(models.Model):
     SHAME = 'S'
     CATEGORIES = ((FAME, 'Hall of Fame (não utilizará limites/fraquia)'),
                   (SHAME, 'Hall of Shame (utilizará limites/franquia)'))
+    CATEGORIES_DICT = dict(CATEGORIES)
 
     NEW = 'N'
     DISCUSSION = 'D'
@@ -51,6 +53,11 @@ class Provider(models.Model):
     @property
     def coverage_to_list(self):
         return [state.abbr for state in self.coverage.all()]
+
+    @property
+    def category_name(self):
+        category = self.CATEGORIES_DICT.get(self.category)
+        return re.sub(r' \([\w\sáã\/]*\)$', '', category)
 
     class Meta:
         verbose_name = 'provedor'

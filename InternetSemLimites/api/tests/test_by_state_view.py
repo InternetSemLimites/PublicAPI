@@ -8,6 +8,7 @@ class TestGet(TestCase):
     def setUp(self):
         sc, *_ = State.objects.get_or_create(abbr='SC', name='Santa Catarina')
         go, *_ = State.objects.get_or_create(abbr='GO', name='Goiás')
+        sp, *_ = State.objects.get_or_create(abbr='SP', name='São Paulo')
         props = {'name': 'Xpto',
                  'url': 'http://xp.to',
                  'source': 'http://twitter.com/xpto',
@@ -16,7 +17,7 @@ class TestGet(TestCase):
                  'status': Provider.PUBLISHED}
         provider = Provider.objects.create(**props)
         provider.coverage = [sc, go]
-        self.resp = self.client.get(resolve_url('fame'))
+        self.resp = self.client.get(resolve_url('api:by_state', 'go'))
 
     def test_get(self):
         self.assertEqual(200, self.resp.status_code)
@@ -26,14 +27,23 @@ class TestGet(TestCase):
 
     def test_contents(self):
         json_resp = self.resp.json()
-        fame = json_resp['providers']
+        fame = json_resp['hall-of-fame']
+        shame = json_resp['hall-of-shame']
         with self.subTest():
             self.assertEqual(1, len(fame))
-            self.assertNotIn('hall-of-shame', json_resp)
-            self.assertIn('headers', json_resp)
+            self.assertEqual(0, len(shame))
             self.assertEqual('Xpto', fame[0]['name'])
             self.assertEqual('http://xp.to', fame[0]['url'])
             self.assertEqual('http://twitter.com/xpto', fame[0]['source'])
             self.assertEqual(['GO', 'SC'], fame[0]['coverage'])
-            self.assertEqual('F', fame[0]['category'])
+            self.assertEqual('Hall of Fame', fame[0]['category'])
             self.assertEqual('Lorem ipsum', fame[0]['other'])
+
+    def test_no_content(self):
+        resp = self.client.get(resolve_url('api:by_state', 'SP'))
+        json_resp = resp.json()
+        fame = json_resp['hall-of-fame']
+        shame = json_resp['hall-of-shame']
+        with self.subTest():
+            self.assertEqual(0, len(fame))
+            self.assertEqual(0, len(shame))

@@ -11,12 +11,12 @@ class TestGet(TestCase):
         props = {'name': 'Xpto',
                  'url': 'http://xp.to',
                  'source': 'http://twitter.com/xpto',
-                 'category': Provider.SHAME,
+                 'category': Provider.FAME,
                  'other': 'Lorem ipsum',
                  'status': Provider.PUBLISHED}
         provider = Provider.objects.create(**props)
         provider.coverage = [sc, go]
-        self.resp = self.client.get(resolve_url('shame'))
+        self.resp = self.client.get(resolve_url('api:fame_by_state', 'GO'))
 
     def test_get(self):
         self.assertEqual(200, self.resp.status_code)
@@ -29,11 +29,9 @@ class TestGet(TestCase):
         shame = json_resp['providers']
         with self.subTest():
             self.assertEqual(1, len(shame))
-            self.assertNotIn('fame', json_resp)
-            self.assertIn('headers', json_resp)
             self.assertEqual('Xpto', shame[0]['name'])
             self.assertEqual('http://xp.to', shame[0]['url'])
             self.assertEqual('http://twitter.com/xpto', shame[0]['source'])
             self.assertEqual(['GO', 'SC'], shame[0]['coverage'])
-            self.assertEqual('S', shame[0]['category'])
+            self.assertEqual('Hall of Fame', shame[0]['category'])
             self.assertEqual('Lorem ipsum', shame[0]['other'])

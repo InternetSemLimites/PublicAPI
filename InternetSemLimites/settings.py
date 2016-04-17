@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'corsheaders',
     'InternetSemLimites.core.apps.CoreConfig',
+    'InternetSemLimites.api',
+    'InternetSemLimites.markdown',
 ]
 
 MIDDLEWARE_CLASSES = [

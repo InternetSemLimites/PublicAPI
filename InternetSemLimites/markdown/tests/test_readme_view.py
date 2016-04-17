@@ -11,28 +11,24 @@ class TestGet(TestCase):
         props = {'name': 'Xpto',
                  'url': 'http://xp.to',
                  'source': 'http://twitter.com/xpto',
-                 'category': Provider.SHAME,
+                 'category': Provider.FAME,
                  'other': 'Lorem ipsum',
                  'status': Provider.PUBLISHED}
         provider = Provider.objects.create(**props)
         provider.coverage = [sc, go]
-        self.resp = self.client.get(resolve_url('regional_shame', 'go'))
+        self.resp = self.client.get(resolve_url('markdown:fame'))
 
     def test_get(self):
         self.assertEqual(200, self.resp.status_code)
 
     def test_type(self):
-        self.assertEqual('application/json', self.resp['Content-Type'])
+        self.assertEqual('text/markdown; charset=UTF-8', self.resp['Content-Type'])
+
+    def test_template(self):
+        self.assertTemplateUsed(self.resp, 'markdown/fame.md')
 
     def test_contents(self):
-        json_resp = self.resp.json()
-        fame = json_resp['providers']
-        with self.subTest():
-            self.assertEqual(1, len(fame))
-            self.assertIn('headers', json_resp)
-            self.assertEqual('Xpto', fame[0]['name'])
-            self.assertEqual('http://xp.to', fame[0]['url'])
-            self.assertEqual('http://twitter.com/xpto', fame[0]['source'])
-            self.assertEqual(['GO', 'SC'], fame[0]['coverage'])
-            self.assertEqual('S', fame[0]['category'])
-            self.assertEqual('Lorem ipsum', fame[0]['other'])
+        contents = ['Xpto', 'Goiás', 'Lorem', 'http://xp.to', 'twitter.com']
+        for content in contents:
+            with self.subTest():
+                self.assertContains(self.resp, content)
