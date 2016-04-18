@@ -8,14 +8,23 @@ class TestGet(TestCase):
     def setUp(self):
         sc, *_ = State.objects.get_or_create(abbr='SC', name='Santa Catarina')
         go, *_ = State.objects.get_or_create(abbr='GO', name='Goiás')
-        props = {'name': 'Xpto',
-                 'url': 'http://xp.to',
-                 'source': 'http://twitter.com/xpto',
-                 'category': Provider.FAME,
-                 'other': 'Lorem ipsum',
-                 'status': Provider.PUBLISHED}
-        provider = Provider.objects.create(**props)
-        provider.coverage = [sc, go]
+        sp, *_ = State.objects.get_or_create(abbr='GO', name='São Paulo')
+        props_published = {'name': 'Xpto',
+                           'url': 'http://xp.to',
+                           'source': 'http://twitter.com/xpto',
+                           'category': Provider.FAME,
+                           'other': 'Lorem ipsum',
+                           'status': Provider.PUBLISHED}
+        props_refused= {'name': 'Xpto',
+                        'url': 'http://xp.to',
+                        'source': 'http://twitter.com/xpto',
+                        'category': Provider.FAME,
+                        'other': 'Lorem ipsum',
+                        'status': Provider.REFUSED}
+        provider_published = Provider.objects.create(**props_published)
+        provider_refused = Provider.objects.create(**props_refused)
+        provider_published.coverage = [sc, go]
+        provider_refused.coverage = [sp]
         self.resp = self.client.get(resolve_url('markdown:fame'))
 
     def test_get(self):
@@ -32,3 +41,4 @@ class TestGet(TestCase):
         for content in contents:
             with self.subTest():
                 self.assertContains(self.resp, content)
+        self.assertNotContains(self.resp, 'São Paulo')

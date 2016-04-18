@@ -21,4 +21,6 @@ def _render_md(request, template, ctx):
 
 def _fame_listed_by_states():
     for state in State.objects.exclude(provider=None):
-        yield (state.name, list(state.provider_set.fame()))
+        providers = list(state.provider_set.fame())
+        if providers:
+            yield (state.name, providers)
