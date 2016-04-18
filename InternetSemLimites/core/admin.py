@@ -3,7 +3,7 @@ from InternetSemLimites.core.models import Provider
 
 
 class ProviderModelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'states', 'status', 'category')
+    list_display = ('name', 'states', 'status', 'category', 'created_at')
     actions = ['publish', 'unpublish', 'refuse', 'shame', 'fame']
     list_filter = ('status', 'created_at', 'category', 'coverage')
     search_fields = ('name',)
