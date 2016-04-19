@@ -10,7 +10,7 @@ cd /home/automacao/InternetSemLimites/doc/ && (
 	git reset --hard HEAD; git clean -f -d; /usr/bin/git pull origin HEAD
 
 	#substitui o arquivo com o novo
-	wget https://internetsemlimites.herokuapp.com/api/$FILE -O $FILE.tmp
+	wget https://internetsemlimites.herokuapp.com/markdown/$FILE -O $FILE.tmp
 
         SIZE=`du -k "README.md.tmp" | cut -f 1`
         if [ $SIZE -lt 1 ]; then
