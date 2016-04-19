@@ -6,8 +6,15 @@ if [ "$1" == "shame" ]; then
 fi
 
 cd /home/automacao/InternetSemLimites/doc/ && (
-	# Reset de seguranÃ§a
-	git reset --hard HEAD; git clean -f -d; /usr/bin/git pull origin HEAD
+	# Reset de segurança
+	git reset --hard HEAD; git clean -f -d; git pull origin HEAD
+
+	# validate http status
+        STATUS=`curl --write-out %{http_code} --insecure --connect-timeout 5 --silent --output /dev/null https://internetsemlimites.herokuapp.com/api/$FILE`
+        if [ "$STATUS" != "200" ]; then
+                echo "invalid http status"
+                exit 0
+        fi
 
 	#substitui o arquivo com o novo
 	wget https://internetsemlimites.herokuapp.com/api/$FILE -O $FILE.tmp
