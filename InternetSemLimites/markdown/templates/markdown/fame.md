@@ -4,9 +4,9 @@
 
 Repositório que busca catalogar e organizar os provedores de internet que não limitarão o tráfego de dados.
 
-Para cadastrar um novo provedor utilize [esse formulário](https://internetsemlimites.herokuapp.com/new/).
-
-Os dados estão disponíveis também em uma [API pública](http://github.com/cuducos/InternetSemLimitesCMS). Se você pensa em fazer algo, um site, um app, um SPA com os dados, [junte-se a nós](https://github.com/jlcarvalho/InternetSemLimites/issues/9).
+* Nosso site é [internetsemlimites.github.io](http://internetsemlimites.github.io)
+* Cadastre um novo provedor [nesse formulário](https://internetsemlimites.herokuapp.com/new/)
+* Use os dados através da [API pública](http://github.com/InternetSemLimites/PublicAPI)
 
 ---
 This repo is focused on creating an open catalog of companies [who are not adhering to data cap in Brazil](http://www.zdnet.com/article/brazilians-protest-against-fixed-broadband-data-cap/).
