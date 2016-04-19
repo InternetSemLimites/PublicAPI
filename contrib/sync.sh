@@ -6,11 +6,20 @@ if [ "$1" == "shame" ]; then
 fi
 
 cd /home/automacao/InternetSemLimites/doc/ && (
-	# Reset de seguranÃ§a
-	git reset --hard HEAD; git clean -f -d; /usr/bin/git pull origin HEAD
+	# Reset de segurança
+	git reset --hard HEAD; git clean -f -d; git pull origin HEAD
+
+	URL="https://internetsemlimites.herokuapp.com/markdown/$FILE"
+
+	# validate http status
+        STATUS=`curl --write-out %{http_code} --insecure --connect-timeout 5 --silent --output /dev/null $URL`
+        if [ "$STATUS" != "200" ]; then
+                echo "invalid http status"
+                exit 0
+        fi
 
 	#substitui o arquivo com o novo
-	wget https://internetsemlimites.herokuapp.com/markdown/$FILE -O $FILE.tmp
+	wget $URL -O $FILE.tmp
 
         SIZE=`du -k "README.md.tmp" | cut -f 1`
         if [ $SIZE -lt 1 ]; then
