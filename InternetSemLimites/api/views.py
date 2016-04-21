@@ -27,15 +27,18 @@ def by_state(request, abbr):
 
 
 def fame_by_state(request, abbr):
-    state = get_object_or_404(State, abbr=abbr.upper())
-    providers = _serialize(state.provider_set.fame())
+    providers = _serialize(_providers_by_state(abbr).fame())
     return _to_json(providers)
 
 
 def shame_by_state(request, abbr):
-    state = get_object_or_404(State, abbr=abbr.upper())
-    providers = _serialize(state.provider_set.shame())
+    providers = _serialize(_providers_by_state(abbr).shame())
     return _to_json(providers)
+
+
+def _providers_by_state(abbr):
+    state = get_object_or_404(State, abbr=abbr.upper())
+    return state.provider_set
 
 
 def _to_json(providers_or_fame, shame=None):
