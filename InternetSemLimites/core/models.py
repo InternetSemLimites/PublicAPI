@@ -54,11 +54,13 @@ class Provider(models.Model):
     source = models.URLField('URL da fonte da informação')
     coverage = models.ManyToManyField(State, verbose_name='Cobertura')
     other = models.CharField('Observações', max_length=140, blank=True)
+
     status = models.CharField('Status', max_length=1, choices=STATUS, default=NEW)
-    created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    moderation_reason = models.CharField('Motivo da moderação', max_length=1,
-                                         choices=REASONS, default=BLANK)
+    moderation_reason = models.CharField('Motivo', max_length=1, choices=REASONS, default=BLANK)
     moderation_comments = models.TextField('Comentários da moderação', blank=True)
+
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Editado em', auto_now=True)
 
     objects = ProviderManager()
 
