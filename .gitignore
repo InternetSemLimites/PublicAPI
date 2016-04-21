@@ -1,5 +1,6 @@
 *.pyc
 *.sqlite3
+.coverage
 .DS_Store
 .env
 .ropeproject/
