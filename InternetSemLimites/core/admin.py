@@ -5,7 +5,7 @@ from InternetSemLimites.core.models import Provider
 class ProviderModelAdmin(admin.ModelAdmin):
     list_display = ('name', 'states', 'status', 'category', 'created_at')
     actions = ['publish', 'unpublish', 'refuse', 'shame', 'fame']
-    list_filter = ('status', 'created_at', 'category', 'coverage')
+    list_filter = ('status', 'moderation_reason', 'category', 'coverage', 'created_at')
     search_fields = ('name',)
 
     def states(self, obj):

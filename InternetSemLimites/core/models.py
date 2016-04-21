@@ -32,6 +32,22 @@ class Provider(models.Model):
               (PUBLISHED, 'Publicado'),
               (REFUSED, 'Recusado'))
 
+
+    BLANK = ''
+    REPEATED = 'R'
+    NOT_FOUND = 'N'
+    IMPRECISE = 'I'
+    NOT_ACCESSIBLE = 'A'
+    PRIVATE = 'P'
+    OTHER = 'O'
+    REASONS = ((BLANK, 'Não se aplica'),
+               (REPEATED, 'Provedor repetido'),
+               (NOT_FOUND, 'Fonte não encontrada (404)'),
+               (IMPRECISE, 'Fonte com informações imprecisas ou erradas'),
+               (NOT_ACCESSIBLE, 'Fonte não acessível (ex.: requer login)'),
+               (PRIVATE, 'Fonte é comunicação privada (ex.: chat ou suporte)'),
+               (OTHER, 'Outros'))
+
     category = models.CharField('Categoria', max_length=1, choices=CATEGORIES)
     name = models.CharField('Nome do provedor', max_length=128)
     url = models.URLField('URL do provedor')
@@ -40,7 +56,9 @@ class Provider(models.Model):
     other = models.CharField('Observações', max_length=140, blank=True)
     status = models.CharField('Status', max_length=1, choices=STATUS, default=NEW)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
-    moderation = models.TextField('Comentários da moderação', blank=True)
+    moderation_reason = models.CharField('Motivo da moderação', max_length=1,
+                                         choices=REASONS, default=BLANK)
+    moderation_comments = models.TextField('Comentários da moderação', blank=True)
 
     objects = ProviderManager()
 
