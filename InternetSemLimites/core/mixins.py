@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 from django.views.generic import CreateView
 
 
-class EmailCreateMixin:
+class EmailAdminCreateMixin:
 
     email_to = None
     email_context_name = None
@@ -45,7 +45,7 @@ class EmailCreateMixin:
             yield user.email
 
 
-class EmailCreateView(EmailCreateMixin, CreateView):
+class EmailAdminCreateView(EmailAdminCreateMixin, CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
