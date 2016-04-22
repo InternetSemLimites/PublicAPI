@@ -56,7 +56,7 @@ class Provider(models.Model):
     other = models.CharField('Observações', max_length=140, blank=True)
 
     status = models.CharField('Status', max_length=1, choices=STATUS, default=NEW)
-    moderation_reason = models.CharField('Motivo', max_length=1, choices=REASONS, default=BLANK)
+    moderation_reason = models.CharField('Motivo', max_length=1, choices=REASONS, blank=True, default=BLANK)
     moderation_comments = models.TextField('Comentários da moderação', blank=True)
 
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
