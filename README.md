@@ -1,4 +1,4 @@
-# Internet Sem Limites - CMS 
+# Internet Sem Limites: CMS & API
 
 [![Build Status](https://travis-ci.org/InternetSemLimites/PublicAPI.svg?branch=master)](https://travis-ci.org/InternetSemLimites/PublicAPI)
 [![Coverage Status](https://coveralls.io/repos/github/InternetSemLimites/PublicAPI/badge.svg?branch=master)](https://coveralls.io/github/InternetSemLimites/PublicAPI?branch=master)
@@ -14,8 +14,8 @@
 * [Hall of Fame `GET /api/fame/`](https://internetsemlimites.herokuapp.com/api/fame/)
 * [Hall of Shame `GET /api/shame/`](https://internetsemlimites.herokuapp.com/api/shame/)
 * [By state `GET /api/<state abbreviation>/`](https://internetsemlimites.herokuapp.com/api/sc/)
-* [Hall of Fame by region `GET /api/<state abbreviation>/fame/`](https://internetsemlimites.herokuapp.com/api/sc/fame/) 
-* [Hall of Shame by region `GET /api/<state abbreviation>/shame/`](https://internetsemlimites.herokuapp.com/api/sc/shame/)
+* [Hall of Fame by state `GET /api/<state abbreviation>/fame/`](https://internetsemlimites.herokuapp.com/api/sc/fame/) 
+* [Hall of Shame by state `GET /api/<state abbreviation>/shame/`](https://internetsemlimites.herokuapp.com/api/sc/shame/)
 
 #### API Headers
 
@@ -51,7 +51,23 @@ python -m pip install -r requirements.txt
 
 ### Settings
 
-Copy `contrib/.env.sample` as `.env` in the project's root folder and adjust your settings.
+Copy `contrib/.env.sample` as `.env` in the project's root folder and adjust your settings. These are the main environment settings:
+
+#### Django settings
+
+* `DEBUG` (_boolean_) enable or disable [Django debug mode](https://docs.djangoproject.com/en/1.9/ref/settings/#debug)
+* `SECRET_KEY` (_string_) [Django's secret key](https://docs.djangoproject.com/en/1.9/ref/settings/#std:setting-SECRET_KEY)
+* `ALLOWED_HOSTS` (_string_) [Django's allowed hosts](https://docs.djangoproject.com/en/1.9/ref/settings/#allowed-hosts)
+
+#### Database
+
+* `DATABASE_URL` (_string_) [Database URL](https://github.com/kennethreitz/dj-database-url#url-schema)
+
+#### Email settings
+
+* `DEFAULT_FROM_EMAIL` (_string_) default e-maill address to be used as the sender (e.g. `noreply@internetsemlimites.herokuapp.com`)
+* `EMAIL_BACKEND` (_string_) Django e-mail backend (e.g. `django.core.mail.backends.console.EmailBackend`)
+* SMTP e-mail settings: `EMAIL_HOST` (_string_), `EMAIL_PORT` (_integer_), `EMAIL_USE_TLS` (_boolean_), `EMAIL_HOST_USER` (_string_), and `EMAIL_HOST_PASSWORD` (_string_)
 
 ### Migrations
 
@@ -77,6 +93,8 @@ Not sure? Run `python manage.py check` and `python manage.py test` just in case.
 ### Ready!
 
 Run the server with `python manage.py runserver` and load [localhost:8000](http://localhost:8000) in your favorite browser.
+
+If you created a _super-user_ account, you can also use [Django Admin](https://docs.djangoproject.com/en/stable/ref/contrib/admin/) at [`/admin/`](http://localhost:8000/admin/).
 
 ## License
 
