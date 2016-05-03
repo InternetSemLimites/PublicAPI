@@ -10,12 +10,18 @@
 
 ### API
 
+#### List existing providers
+
 * [All providers `GET /api/`](https://internetsemlimites.herokuapp.com/api/)
 * [Hall of Fame `GET /api/fame/`](https://internetsemlimites.herokuapp.com/api/fame/)
 * [Hall of Shame `GET /api/shame/`](https://internetsemlimites.herokuapp.com/api/shame/)
 * [By state `GET /api/<state abbreviation>/`](https://internetsemlimites.herokuapp.com/api/sc/)
 * [Hall of Fame by state `GET /api/<state abbreviation>/fame/`](https://internetsemlimites.herokuapp.com/api/sc/fame/) 
 * [Hall of Shame by state `GET /api/<state abbreviation>/shame/`](https://internetsemlimites.herokuapp.com/api/sc/shame/)
+
+#### Create new provider
+* [Create new provider `POST /api/provider/new/`](https://internetsemlimites.herokuapp.com/api/provider/42/)
+* [Provider detail `GET /api/provider/<provider id>/`](https://internetsemlimites.herokuapp.com/api/provider/42/)
 
 #### API Headers
 
@@ -29,10 +35,9 @@ All API requests returns a JSON with list(s) of providers (`providers`, `hall-of
 * `source`: URL for the source of the info (usually an  [archive.is](http://archive.is) link)
 * `url`: URL of the provider
 
-
 ### CMS
 
-* Create new providers: [`GET/POST /new`](https://internetsemlimites.herokuapp.com/new/)
+Anyone can suggest new providers using [our form](https://internetsemlimites.herokuapp.com/new/).
 
 ### Auto generated markdown files ([main repository](https://github.com/InternetSemLimites/InternetSemLimites))
 
