@@ -70,6 +70,12 @@ class Provider(models.Model):
     def get_absolute_url(self):
         return resolve_url('provider', self.pk)
 
+    def get_moderation_reason(self):
+        return dict(self.REASONS).get(self.moderation_reason)
+
+    def get_status(self):
+        return dict(self.STATUS).get(self.status)
+
     @property
     def coverage_to_list(self):
         return [state.abbr for state in self.coverage.all()]

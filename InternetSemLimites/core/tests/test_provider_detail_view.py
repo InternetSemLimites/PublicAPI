@@ -13,7 +13,8 @@ class TestGet(TestCase):
                  'source': 'http://twitter.com/xpto',
                  'category': Provider.FAME,
                  'other': 'Lorem ipsum',
-                 'status': Provider.PUBLISHED}
+                 'status': Provider.REFUSED,
+                 'moderation_reason': Provider.REPEATED}
         provider = Provider.objects.create(**props)
         provider.coverage = [sc, go]
         self.resp = self.client.get(resolve_url('provider', 1))
@@ -25,7 +26,8 @@ class TestGet(TestCase):
         self.assertTemplateUsed(self.resp, 'core/provider_detail.html')
 
     def test_html(self):
-        data = ('Xpto', 'xp.to', 'twitter', 'Hall of Fame', 'Lorem', 'Goiás')
+        data = ('Xpto', 'xp.to', 'twitter', 'Hall of Fame', 'Lorem', 'Goiás',
+                'Status', 'Recusado', 'Provedor repetido')
         with self.subTest():
             for expected in data:
                 self.assertContains(self.resp, expected)

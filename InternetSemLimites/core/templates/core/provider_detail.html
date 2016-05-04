@@ -34,16 +34,23 @@
   <dt>Observações</dt>
   <dd>{{ provider.other }}</dd>
 
-  <dt>Publicado</dt>
-  {% if provider.published %}
-  <dd>Sim</dd>
-  {% else %}
-  <dd>Não</dd>
-  {% endif %}
+  <dt>Status</dt>
+  <dd>
+    {{ provider.get_status }}
+    {% if provider.status == 'R' %}({{ provider.get_moderation_reason }}){% endif %}
+  </dd>
 
   <dt>Criado em</dt>
   <dd>{{ provider.created_at }}</dd>
 
 </dl>
+
+<p>
+  <small>
+    Você pode guardar esse endereço e retornar aqui para acompanhar o status da
+    sua sugestão de provedor:
+    <small><code>{{ request.build_absolute_uri }}</code></small>
+  </small>
+</p>
 
 {% endblock %}
