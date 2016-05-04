@@ -45,7 +45,7 @@ def shame_by_state(request, abbr):
 
 def provider_detail(request, pk):
     provider = get_object_or_404(Provider, pk=pk)
-    return JsonResponse({'provider': _serialize_object(provider)})
+    return JsonResponse({'provider': _serialize_object(provider, True)})
 
 
 @csrf_exempt
@@ -87,13 +87,16 @@ def _serialize_query(query):
         yield _serialize_object(obj)
 
 
-def _serialize_object(obj):
+def _serialize_object(obj, after_post=False):
     fields = [f.__str__().split('.')[-1] for f in Provider._meta.fields]
     fields.remove('id')
     fields.remove('status')
     output = {field: getattr(obj, field) for field in fields}
     output['coverage'] = obj.coverage_to_list
     output['category'] = obj.category_name
+    if after_post:
+        output['moderation_reason'] = obj.get_moderation_reason()
+        output['status'] = obj.get_status()
     return output
 
 

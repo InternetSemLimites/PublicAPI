@@ -14,7 +14,8 @@ class TestGet(TestCase):
                  'source': 'http://twitter.com/xpto',
                  'category': Provider.FAME,
                  'other': 'Lorem ipsum',
-                 'status': Provider.PUBLISHED}
+                 'status': Provider.REFUSED,
+                 'moderation_reason': Provider.REPEATED}
         provider = Provider.objects.create(**props)
         provider.coverage = [sc, go]
         self.resp = self.client.get(resolve_url('api:provider', 1))
@@ -35,6 +36,8 @@ class TestGet(TestCase):
             self.assertEqual(['GO', 'SC'], provider['coverage'])
             self.assertEqual('Hall of Fame', provider['category'])
             self.assertEqual('Lorem ipsum', provider['other'])
+            self.assertEqual('Recusado', provider['status'])
+            self.assertEqual('Provedor repetido', provider['moderation_reason'])
 
     def test_404(self):
         resp = self.client.get(resolve_url('api:provider', 42))

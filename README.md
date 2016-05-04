@@ -34,6 +34,8 @@ All API requests returns a JSON with list(s) of providers (`providers`, `hall-of
 * `other`: General information (e.g.: cities covered, residential and/or corporative only etc.)
 * `source`: URL for the source of the info (usually an  [archive.is](http://archive.is) link)
 * `url`: URL of the provider
+* `status`: (only for _provider detail_ endpoint) moderation status
+* `moderation_reason`: (only for _provider detail_ endpoint) moderation justification for the status above
 
 ### CMS
 
