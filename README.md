@@ -1,6 +1,7 @@
 # Internet Sem Limites: CMS & API
 
 [![Build Status](https://travis-ci.org/InternetSemLimites/PublicAPI.svg?branch=master)](https://travis-ci.org/InternetSemLimites/PublicAPI)
+[![Updates](https://pyup.io/repos/github/internetsemlimites/publicapi/shield.svg)](https://pyup.io/repos/github/internetsemlimites/publicapi/)
 [![Coverage Status](https://coveralls.io/repos/github/InternetSemLimites/PublicAPI/badge.svg?branch=master)](https://coveralls.io/github/InternetSemLimites/PublicAPI?branch=master)
 [![Code Climate](https://codeclimate.com/github/InternetSemLimites/PublicAPI/badges/gpa.svg)](https://codeclimate.com/github/InternetSemLimites/PublicAPI)
 
