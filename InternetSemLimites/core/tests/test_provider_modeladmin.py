@@ -1,4 +1,6 @@
-from django.test import TestCase
+from unittest import skip
+from unittest.mock import patch
+from django.test import RequestFactory, TestCase
 from django.contrib.admin.sites import AdminSite
 from InternetSemLimites.core.admin import ProviderModelAdmin
 from InternetSemLimites.core.models import Provider, State
@@ -16,7 +18,48 @@ class TestProviderModelAdmin(TestCase):
                  'other': 'Lorem ipsum'}
         self.provider = Provider.objects.create(**props)
         self.provider.coverage = [sc, go]
-        self.model_admin = ProviderModelAdmin(Provider, AdminSite())
+        self.admin = ProviderModelAdmin(Provider, AdminSite())
 
-    def test_states(self):
-        self.assertEqual('GO, SC', self.model_admin.states(self.provider))
+    def test_states_field(self):
+        self.assertEqual('GO, SC', self.admin.states(self.provider))
+
+    @patch('InternetSemLimites.core.admin.ProviderModelAdmin.message_user')
+    def test_publish_action(self, mock_message_user):
+        self.admin.publish(RequestFactory(), Provider.objects.all())
+        message = mock_message_user.call_args[0][1]
+        self.assertEqual(1, Provider.objects.published().count())
+        self.assertTrue('1 provedor publicado.', message)
+
+    @patch('InternetSemLimites.core.admin.ProviderModelAdmin.message_user')
+    def test_refuse(self, mock_message_user):
+        self.admin.refuse(RequestFactory(), Provider.objects.all())
+        total = Provider.objects.filter(status=Provider.REFUSED).count()
+        message = mock_message_user.call_args[0][1]
+        self.assertEqual(1, total)
+        self.assertTrue('1 provedor tirado do ar.', message)
+
+    @patch('InternetSemLimites.core.admin.ProviderModelAdmin.message_user')
+    def test_unpublish(self, mock_message_user):
+        self.admin.unpublish(RequestFactory(), Provider.objects.all())
+        total = Provider.objects.filter(status=Provider.DISCUSSION).count()
+        message = mock_message_user.call_args[0][1]
+        self.assertEqual(1, total)
+        self.assertTrue('1 provedor recolocado em discussão.', message)
+
+    @patch('InternetSemLimites.core.admin.ProviderModelAdmin.message_user')
+    def test_shame(self, mock_message_user):
+        self.admin.shame(RequestFactory(), Provider.objects.all())
+        total = Provider.objects.filter(category=Provider.SHAME).count()
+        message = mock_message_user.call_args[0][1]
+        self.assertEqual(1, total)
+        self.assertTrue('1 provedor incluído no hall of shame.', message)
+
+    @patch('InternetSemLimites.core.admin.ProviderModelAdmin.message_user')
+    def test_fame(self, mock_message_user):
+        self.provider.category = Provider.SHAME
+        self.provider.save()
+        self.admin.fame(RequestFactory(), Provider.objects.all())
+        total = Provider.objects.filter(category=Provider.FAME).count()
+        message = mock_message_user.call_args[0][1]
+        self.assertEqual(1, total)
+        self.assertTrue('1 provedor incluído no hall of shame.', message)
