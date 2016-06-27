@@ -1,0 +1,5 @@
+  [run]
+  source = InternetSemLimites
+  omit =
+      InternetSemLimites/wsgi.py
+      InternetSemLimites/core/migrations/*.py

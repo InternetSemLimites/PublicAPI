@@ -12,7 +12,7 @@ before_script:
   - python manage.py migrate
   - python manage.py collectstatic --no-input
 script:
-  - coverage run --source=InternetSemLimites --omit="InternetSemLimites/wsgi.py,InternetSemLimites/core/migrations/*.py" manage.py test -v 3
+  - coverage run manage.py test -v 3
 after_success:
   - coveralls
 addons:
