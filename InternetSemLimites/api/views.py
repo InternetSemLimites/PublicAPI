@@ -68,6 +68,30 @@ def provider_new(request):
     return HttpResponseRedirect(resolve_url('api:provider', provider.pk))
 
 
+@csrf_exempt
+def provider_edit(request, pk):
+
+    if request.method != 'POST':
+        return HttpResponseNotAllowed(['POST'])
+
+    provider = Provider.objects.get(pk=pk)
+    provider.status = Provider.NEW
+    provider_form = ProviderForm(request.POST, instance=provider)
+
+    if not provider_form.is_valid():
+        return JsonResponse({'errors': provider_form.errors})
+
+    provider_form.save()
+
+    _send_mail('+1 InternetSemLimites',
+               settings.DEFAULT_FROM_EMAIL,
+               list(_get_admin_emails()),
+               'core/provider_email.txt',
+               dict(provider=provider))
+
+    return HttpResponseRedirect(resolve_url('api:provider', provider.pk))
+
+
 def _providers_by_state(abbr):
     state = get_object_or_404(State, abbr=abbr.upper())
     return state.provider_set
