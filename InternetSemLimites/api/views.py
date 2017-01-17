@@ -132,10 +132,9 @@ def _serialize_query(query):
 
 
 def _serialize_object(obj, after_post=False):
-    fields = [f.__str__().split('.')[-1] for f in Provider._meta.fields]
-    fields.remove('id')
-    fields.remove('status')
-    fields.remove('edited_from')
+    all_fields = set(f.__str__().split('.')[-1] for f in Provider._meta.fields)
+    ignore_fields = set(['id', 'status', 'edited_from'])
+    fields = tuple(all_fields - ignore_fields)
     output = {field: getattr(obj, field) for field in fields}
     output['coverage'] = obj.coverage_to_list
     output['category'] = obj.category_name
