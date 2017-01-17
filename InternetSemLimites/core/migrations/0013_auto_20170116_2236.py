@@ -23,9 +23,4 @@ class Migration(migrations.Migration):
             name='moderation_reason',
             field=models.CharField(blank=True, choices=[('', 'Não se aplica'), ('R', 'Provedor repetido'), ('N', 'Fonte não encontrada (404)'), ('I', 'Fonte com informações imprecisas ou erradas'), ('A', 'Fonte não acessível (ex.: requer login)'), ('P', 'Fonte é comunicação privada (ex.: chat ou suporte)'), ('O', 'Outros')], default='', max_length=1, verbose_name='Motivo'),
         ),
-        migrations.AlterField(
-            model_name='provider',
-            name='status',
-            field=models.CharField(choices=[('N', 'Aguardando moderação'), ('D', 'Em discussão'), ('P', 'Publicado'), ('R', 'Recusado'), ('E', 'Edição aguardando moderação'), ('O', 'Substituído por versão atualizada'), ('A', 'Arquivado')], default='N', max_length=1, verbose_name='Status'),
-        ),
     ]

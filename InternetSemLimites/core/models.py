@@ -29,14 +29,12 @@ class Provider(models.Model):
     REFUSED = 'R'
     EDIT = 'E'
     OUTDATED = 'O'
-    ARCHIVED = 'A'
     STATUS = ((NEW, 'Aguardando moderação'),
               (DISCUSSION, 'Em discussão'),
               (PUBLISHED, 'Publicado'),
               (REFUSED, 'Recusado'),
               (EDIT, 'Edição aguardando moderação'),
-              (OUTDATED, 'Substituído por versão atualizada'),
-              (ARCHIVED, 'Arquivado'))
+              (OUTDATED, 'Substituído por versão atualizada'))
 
     BLANK = ''
     REPEATED = 'R'
