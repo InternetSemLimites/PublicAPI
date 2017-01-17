@@ -1,0 +1,47 @@
+Foi adicionada uma edição para o provedor {{ provider_original.name}} para o InternetSemLimites.
+
+
+
+Ele ainda não está no ar na API. Para isso alguém tem que marcar como
+“publicado”: http://internetsemlimites.herokuapp.com{% url 'home' %}admin/core/provider/{{ provider_edited.pk }}/change/
+
+Ou, caso as informações editas não forem válidas, marcar como
+"arquivado": http://internetsemlimites.herokuapp.com{% url 'home' %}admin/core/provider/{{ provider_edited.pk }}/change/
+
+
+Informações do provedor original:
+
+Categoria: Hall of {% if provider_original.category == 'F' %}F{% else %}Sh{% endif %}ame
+
+Nome do provedor: {{ provider_original.name }}
+
+URL do provedor: {{ provider_original.url }}
+
+URL da fonte da informação: {{ provider_original.source }}
+
+Cobertura: {{ provider_original.coverage.all|join:', ' }}
+
+Observações: {{ provider_original.other }}
+
+Publicado: {% if provider_original.published %}Sim}{% else %}Não{% endif %}
+
+Criado em: {{ provider_original.created_at }}
+
+
+Informações do provedor editado:
+
+Categoria: Hall of {% if provider_edited.category == 'F' %}F{% else %}Sh{% endif %}ame
+
+Nome do provedor: {{ provider_edited.name }}
+
+URL do provedor: {{ provider_edited.url }}
+
+URL da fonte da informação: {{ provider_edited.source }}
+
+Cobertura: {{ provider_edited.coverage.all|join:', ' }}
+
+Observações: {{ provider_edited.other }}
+
+Publicado: {% if provider_edited.published %}Sim}{% else %}Não{% endif %}
+
+Criado em: {{ provider_edited.created_at }}
