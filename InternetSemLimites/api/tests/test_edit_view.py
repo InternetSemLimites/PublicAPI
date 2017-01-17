@@ -49,14 +49,16 @@ class TestPostValid(TestCase):
         self.assertEqual(1, len(mail.outbox))
 
     def test_edit(self):
+
         edited_provider = Provider.objects.last()
+        edited_provider_coverage_ids = [state.id for state in edited_provider.coverage.all()]
 
         self.assertEqual(edited_provider.name, self.data['name'])
         self.assertEqual(edited_provider.url, self.data['url'])
         self.assertEqual(edited_provider.source, self.data['source'])
         self.assertEqual(edited_provider.category, self.data['category'])
         self.assertEqual(edited_provider.other, self.data['other'])
-        self.assertEqual(edited_provider.coverage_id_to_list, self.data['coverage'])
+        self.assertEqual(edited_provider_coverage_ids, self.data['coverage'])
 
 
 class TestPostInvalid(TestCase):

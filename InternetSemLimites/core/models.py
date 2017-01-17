@@ -87,10 +87,6 @@ class Provider(models.Model):
         return [state.abbr for state in self.coverage.all()]
 
     @property
-    def coverage_id_to_list(self):
-        return [state.id for state in self.coverage.all()]
-
-    @property
     def category_name(self):
         category = self.CATEGORIES_DICT.get(self.category)
         return re.sub(r' \([\w\sáã\/]*\)$', '', category)
