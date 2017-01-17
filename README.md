@@ -25,7 +25,7 @@
 * [Provider detail `GET /api/provider/<provider id>/`](https://internetsemlimites.herokuapp.com/api/provider/42/)
 
 #### Edit existing provider
-* [Edit existing provider `POST /api/provider/<provider id>/edit/`](https://internetsemlimites.herokuapp.com/api/provider/42/edit/)
+* [Edit existing provider `POST /api/provider/<provider id>/`](https://internetsemlimites.herokuapp.com/api/provider/42/)
 
 #### API Headers
 
