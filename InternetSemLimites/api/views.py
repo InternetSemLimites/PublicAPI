@@ -59,7 +59,7 @@ def provider(request, pk):
 
     if route:
         return route(request, pk)
-    return HttpResponseNotAllowed(['GET', 'POST'])
+    return HttpResponseNotAllowed([method for method in routes])
 
 
 @csrf_exempt
