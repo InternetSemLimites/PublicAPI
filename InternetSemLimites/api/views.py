@@ -49,8 +49,21 @@ def provider_detail(request, pk):
 
 
 @csrf_exempt
-def provider_new(request):
+def provider(request, pk):
+    routes = {
+        'GET': provider_detail,
+        'POST': provider_edit
+    }
 
+    route = routes.get(request.method)
+
+    if route:
+        return route(request, pk)
+    return HttpResponseNotAllowed(['GET', 'POST'])
+
+
+@csrf_exempt
+def provider_new(request):
     if request.method != 'POST':
         return HttpResponseNotAllowed(['POST'])
 
@@ -71,25 +84,32 @@ def provider_new(request):
 @csrf_exempt
 def provider_edit(request, pk):
 
-    if request.method != 'POST':
-        return HttpResponseNotAllowed(['POST'])
+    provider_original = get_object_or_404(Provider, pk=pk)
 
-    provider = Provider.objects.get(pk=pk)
-    provider.status = Provider.NEW
-    provider_form = ProviderForm(request.POST, instance=provider)
+    # Copy the original provider, make the consult again to change the object ID
+    provider_edited = get_object_or_404(Provider, pk=pk)
+    provider_edited.id = None
+    provider_edited.edited_from = provider_original
+    provider_edited.status = Provider.EDIT
 
-    if not provider_form.is_valid():
-        return JsonResponse({'errors': provider_form.errors})
+    provider_edited_form = ProviderForm(request.POST, instance=provider_edited)
 
-    provider_form.save()
+    if not provider_edited_form.is_valid():
+        return JsonResponse({'errors': provider_edited_form.errors}, status=422)
+
+    provider_edited_form.save()
 
     _send_mail('+1 InternetSemLimites',
                settings.DEFAULT_FROM_EMAIL,
                list(_get_admin_emails()),
-               'core/provider_email.txt',
-               dict(provider=provider))
+               'core/provider_edit_email.txt',
+               dict(
+                   provider_original=provider_original,
+                   provider_edited=provider_edited,
 
-    return HttpResponseRedirect(resolve_url('api:provider', provider.pk))
+               ))
+
+    return HttpResponseRedirect(resolve_url('api:provider', provider_edited.pk))
 
 
 def _providers_by_state(abbr):
@@ -115,6 +135,7 @@ def _serialize_object(obj, after_post=False):
     fields = [f.__str__().split('.')[-1] for f in Provider._meta.fields]
     fields.remove('id')
     fields.remove('status')
+    fields.remove('edited_from')
     output = {field: getattr(obj, field) for field in fields}
     output['coverage'] = obj.coverage_to_list
     output['category'] = obj.category_name
