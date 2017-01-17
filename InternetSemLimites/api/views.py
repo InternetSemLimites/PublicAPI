@@ -1,3 +1,4 @@
+from copy import deepcopy
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core import mail
@@ -86,8 +87,7 @@ def provider_edit(request, pk):
 
     provider_original = get_object_or_404(Provider, pk=pk)
 
-    # Copy the original provider, make the consult again to change the object ID
-    provider_edited = get_object_or_404(Provider, pk=pk)
+    provider_edited = deepcopy(provider_original)
     provider_edited.id = None
     provider_edited.edited_from = provider_original
     provider_edited.status = Provider.EDIT
