@@ -24,6 +24,9 @@
 * [Create new provider `POST /api/provider/new/`](https://internetsemlimites.herokuapp.com/api/provider/42/)
 * [Provider detail `GET /api/provider/<provider id>/`](https://internetsemlimites.herokuapp.com/api/provider/42/)
 
+#### Edit existing provider
+* [Edit existing provider `POST /api/provider/<provider id>/`](https://internetsemlimites.herokuapp.com/api/provider/42/)
+
 #### API Headers
 
 All API requests returns a JSON with list(s) of providers (`providers`, `hall-of-fame` or `hall-of-shame`). Each provider is an obejct with the following properties:

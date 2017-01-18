@@ -27,11 +27,14 @@ class Provider(models.Model):
     DISCUSSION = 'D'
     PUBLISHED = 'P'
     REFUSED = 'R'
+    EDIT = 'E'
+    OUTDATED = 'O'
     STATUS = ((NEW, 'Aguardando moderação'),
               (DISCUSSION, 'Em discussão'),
               (PUBLISHED, 'Publicado'),
-              (REFUSED, 'Recusado'))
-
+              (REFUSED, 'Recusado'),
+              (EDIT, 'Edição aguardando moderação'),
+              (OUTDATED, 'Substituído por versão atualizada'))
 
     BLANK = ''
     REPEATED = 'R'
@@ -55,6 +58,7 @@ class Provider(models.Model):
     coverage = models.ManyToManyField(State, verbose_name='Cobertura')
     other = models.CharField('Observações', max_length=140, blank=True)
 
+    edited_from = models.ForeignKey('self', null=True, blank=True)
     status = models.CharField('Status', max_length=1, choices=STATUS, default=NEW)
     moderation_reason = models.CharField('Motivo', max_length=1, choices=REASONS, blank=True, default=BLANK)
     moderation_comments = models.TextField('Comentários da moderação', blank=True)

@@ -4,6 +4,7 @@ from django.test import RequestFactory, TestCase
 from django.contrib.admin.sites import AdminSite
 from InternetSemLimites.core.admin import ProviderModelAdmin
 from InternetSemLimites.core.models import Provider, State
+from InternetSemLimites.core.forms import ProviderForm
 
 
 class TestProviderModelAdmin(TestCase):
@@ -63,3 +64,22 @@ class TestProviderModelAdmin(TestCase):
         message = mock_message_user.call_args[0][1]
         self.assertEqual(1, total)
         self.assertTrue('1 provedor incluído no hall of shame.', message)
+
+    def test_save_model(self):
+        provider_edited = self.provider
+        provider_edited.id = None
+        provider_edited.save()
+
+        self.provider.status = Provider.PUBLISHED
+        self.provider.edited_from = provider_edited
+        self.provider.save()
+
+        form = ProviderForm()
+        form.changed_data = ['status']
+
+        self.admin.save_model(RequestFactory(), provider_edited, form, True)
+        self.assertEqual(self.provider.status, Provider.OUTDATED)
+
+
+
+

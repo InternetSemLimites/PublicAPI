@@ -58,5 +58,15 @@ class ProviderModelAdmin(admin.ModelAdmin):
         message = single if count == 1 else plural
         self.message_user(request, message)
 
+    def save_model(self, request, obj, form, change):
+
+        # Change original provider status if edition is accepted
+        if 'status' in form.changed_data and obj.edited_from:
+            if obj.status == Provider.PUBLISHED:
+                obj.edited_from.status = Provider.OUTDATED
+                obj.edited_from.save()
+
+        return super().save_model(request, obj, form, change)
+
 
 admin.site.register(Provider, ProviderModelAdmin)

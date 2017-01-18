@@ -1,3 +1,4 @@
+from copy import deepcopy
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core import mail
@@ -49,8 +50,21 @@ def provider_detail(request, pk):
 
 
 @csrf_exempt
-def provider_new(request):
+def provider(request, pk):
+    routes = {
+        'GET': provider_detail,
+        'POST': provider_edit
+    }
 
+    route = routes.get(request.method)
+
+    if route:
+        return route(request, pk)
+    return HttpResponseNotAllowed([method for method in routes])
+
+
+@csrf_exempt
+def provider_new(request):
     if request.method != 'POST':
         return HttpResponseNotAllowed(['POST'])
 
@@ -66,6 +80,36 @@ def provider_new(request):
                dict(provider=provider))
 
     return HttpResponseRedirect(resolve_url('api:provider', provider.pk))
+
+
+@csrf_exempt
+def provider_edit(request, pk):
+
+    provider_original = get_object_or_404(Provider, pk=pk)
+
+    provider_edited = deepcopy(provider_original)
+    provider_edited.id = None
+    provider_edited.edited_from = provider_original
+    provider_edited.status = Provider.EDIT
+
+    provider_edited_form = ProviderForm(request.POST, instance=provider_edited)
+
+    if not provider_edited_form.is_valid():
+        return JsonResponse({'errors': provider_edited_form.errors}, status=422)
+
+    provider_edited_form.save()
+
+    _send_mail('+1 InternetSemLimites',
+               settings.DEFAULT_FROM_EMAIL,
+               list(_get_admin_emails()),
+               'core/provider_edit_email.txt',
+               dict(
+                   provider_original=provider_original,
+                   provider_edited=provider_edited,
+
+               ))
+
+    return HttpResponseRedirect(resolve_url('api:provider', provider_edited.pk))
 
 
 def _providers_by_state(abbr):
@@ -88,9 +132,9 @@ def _serialize_query(query):
 
 
 def _serialize_object(obj, after_post=False):
-    fields = [f.__str__().split('.')[-1] for f in Provider._meta.fields]
-    fields.remove('id')
-    fields.remove('status')
+    all_fields = set(f.__str__().split('.')[-1] for f in Provider._meta.fields)
+    ignore_fields = set(['id', 'status', 'edited_from'])
+    fields = tuple(all_fields - ignore_fields)
     output = {field: getattr(obj, field) for field in fields}
     output['coverage'] = obj.coverage_to_list
     output['category'] = obj.category_name
