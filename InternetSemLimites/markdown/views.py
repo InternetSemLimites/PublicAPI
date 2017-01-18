@@ -14,8 +14,8 @@ def shame(request):
 
 
 def _render_md(request, template, ctx):
-    template = 'markdown/{}.md'.format(template)
-    return render(request, template, ctx,
+    template_path = f'markdown/{template}.md'
+    return render(request, template_path, ctx,
                   content_type='text/markdown; charset=UTF-8')
 
 

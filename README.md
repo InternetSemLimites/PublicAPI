@@ -51,7 +51,7 @@ Anyone can suggest new providers using [our form](https://internetsemlimites.her
 
 ### Requirements
 
-The CMS is based in [Python](http://python.org) 3 and [Django](http://djangoproject.com). Once you have `pip` available, install the dependencies:
+The CMS is based in [Python](http://python.org) 3.6 and [Django](http://djangoproject.com). Once you have `pip` available, install the dependencies:
 
 ```console
 python -m pip install -r requirements.txt

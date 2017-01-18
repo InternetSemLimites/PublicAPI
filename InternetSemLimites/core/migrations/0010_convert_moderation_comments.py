@@ -41,8 +41,7 @@ def set_moderation(apps, schema_editor):
     Provider = apps.get_model('core', 'Provider')
     for provider in Provider.objects.exclude(moderation_reason=''):
         standardized_reason = REASONS_DICT.get(provider.moderation_reason, '')
-        moderation = '{}{}'.format(provider.moderation_comments,
-                                   standardized_reason)
+        moderation = f'{provider.moderation_comments} {standardized_reason}'
         provider.moderation = moderation
         provider.save()
 

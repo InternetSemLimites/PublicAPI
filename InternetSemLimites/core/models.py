@@ -9,7 +9,7 @@ class State(models.Model):
     abbr = models.CharField('Sigla', max_length=2)
 
     def __str__(self):
-        return '{} ({})'.format(self.name, self.abbr)
+        return f'{self.name} ({self.abbr})'
 
     class Meta:
         ordering = ['name']
