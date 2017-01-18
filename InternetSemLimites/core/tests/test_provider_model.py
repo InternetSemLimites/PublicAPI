@@ -15,6 +15,9 @@ class TestProviderModel(TestCase):
         self.provider = Provider.objects.create(**props)
         self.provider.coverage = [sc, go]
 
+    def test_str(self):
+        self.assertEqual('Xpto', str(self.provider))
+
     def test_create(self):
         self.assertTrue(Provider.objects.exists())
 

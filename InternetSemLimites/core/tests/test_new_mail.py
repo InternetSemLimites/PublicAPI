@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.core import mail
 from django.shortcuts import resolve_url
 from django.test import TestCase
+
+from InternetSemLimites.core.mixins import EmailAdminCreateMixin
 from InternetSemLimites.core.models import Provider, State
 
 
@@ -37,3 +39,25 @@ class TestValidPost(TestCase):
         for content in contents:
             with self.subTest():
                 self.assertIn(content, self.email.body)
+
+
+class TestMixindminCreateMixin(TestCase):
+
+    def setUp(self):
+        self.mixin = EmailAdminCreateMixin()
+        self.mixin.object = Provider
+
+    def test_get_unset_email_template_name(self):
+        self.assertEqual('core/provider_email.txt',
+                         self.mixin.get_email_template_name())
+
+    def test_get_set_email_template_name(self):
+        self.mixin.email_template_name = '42'
+        self.assertEqual('42', self.mixin.get_email_template_name())
+
+    def test_get_unset_email_context_name(self):
+        self.assertEqual('provider', self.mixin.get_email_context_name())
+
+    def test_get_set_email_context_name(self):
+        self.mixin.email_context_name = '42'
+        self.assertEqual('42', self.mixin.get_email_context_name())

@@ -5,4 +5,5 @@
 .env
 .ropeproject/
 __pycache__/
+htmlcov/
 static/

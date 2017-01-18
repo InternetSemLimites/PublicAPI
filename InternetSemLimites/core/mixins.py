@@ -27,8 +27,10 @@ class EmailAdminCreateMixin:
     def get_email_template_name(self):
         if self.email_template_name:
             return self.email_template_name
-        return '{}/{}_email.txt'.format(self.object._meta.app_label,
-                                        self.object._meta.model_name)
+
+        app = self.object._meta.app_label
+        model = self.object._meta.model_name
+        return f'{app}/{model}_email.txt'
 
     def get_email_context_data(self, **kwargs):
         context = dict(kwargs)

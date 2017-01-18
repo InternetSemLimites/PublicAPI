@@ -34,6 +34,12 @@ class TestPostValid(TestCase):
         self.resp = self.client.post(resolve_url('api:provider', self.provider.pk), self.data)
         self.edited_provider = Provider.objects.last()
 
+    def test_not_allowed_methods(self):
+        url = resolve_url('api:provider', self.provider.pk)
+        for r in (self.client.delete(url), self.client.patch(url, self.data)):
+            with self.subTest():
+                self.assertEqual(405, r.status_code)
+
     def test_post(self):
         self.assertRedirects(self.resp, resolve_url('api:provider', self.edited_provider.pk))
 
