@@ -7,4 +7,5 @@ gunicorn==19.7.0
 psycopg2==2.7
 python-decouple==3.0
 pytz==2016.10
+pyup-django==0.3.0
 whitenoise==3.3.0
