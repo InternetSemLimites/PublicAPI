@@ -6,5 +6,5 @@ django-test-without-migrations==0.6
 gunicorn==19.7.1
 psycopg2==2.7.3.2
 python-decouple==3.1
-pytz==2017.2
+pytz==2017.3
 whitenoise==3.3.0
