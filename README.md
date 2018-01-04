@@ -106,7 +106,3 @@ Not sure? Run `python manage.py check` and `python manage.py test` just in case.
 Run the server with `python manage.py runserver` and load [localhost:8000](http://localhost:8000) in your favorite browser.
 
 If you created a _super-user_ account, you can also use [Django Admin](https://docs.djangoproject.com/en/stable/ref/contrib/admin/) at [`/admin/`](http://localhost:8000/admin/).
-
-## License
-
-Licensed under the [MIT License](LICENSE).
