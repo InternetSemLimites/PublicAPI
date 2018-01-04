@@ -58,7 +58,7 @@ class Provider(models.Model):
     coverage = models.ManyToManyField(State, verbose_name='Cobertura')
     other = models.CharField('Observações', max_length=140, blank=True)
 
-    edited_from = models.ForeignKey('self', null=True, blank=True)
+    edited_from = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
     status = models.CharField('Status', max_length=1, choices=STATUS, default=NEW)
     moderation_reason = models.CharField('Motivo', max_length=1, choices=REASONS, blank=True, default=BLANK)
     moderation_comments = models.TextField('Comentários da moderação', blank=True)

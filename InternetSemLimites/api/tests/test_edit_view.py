@@ -94,4 +94,4 @@ class TestPostInvalid(TestCase):
             self.assertEqual('Este campo é obrigatório.', errors['category'][0])
             self.assertEqual('Este campo é obrigatório.', errors['source'][0])
             self.assertEqual('Este campo é obrigatório.', errors['url'][0])
-            self.assertIn('não é um valor válido para', errors['coverage'][0])
+            self.assertIn('não é um valor válido', errors['coverage'][0])

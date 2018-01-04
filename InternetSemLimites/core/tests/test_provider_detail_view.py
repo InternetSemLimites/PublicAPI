@@ -16,7 +16,7 @@ class TestGet(TestCase):
                  'status': Provider.REFUSED,
                  'moderation_reason': Provider.REPEATED}
         provider = Provider.objects.create(**props)
-        provider.coverage = [sc, go]
+        provider.coverage.set([sc, go])
         self.resp = self.client.get(resolve_url('provider', 1))
 
     def test_get(self):
