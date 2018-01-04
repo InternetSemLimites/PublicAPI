@@ -13,17 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.urls import include, path
 from django.contrib import admin
-from InternetSemLimites.core.views import (redirect_to_api, provider_details,
-                                           provider_new)
+
+from InternetSemLimites.core.views import (
+    provider_details,
+    provider_new,
+    redirect_to_api
+)
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', redirect_to_api, name='home'),
-    url(r'^api/', include('InternetSemLimites.api.urls', namespace='api')),
-    url(r'^markdown/', include('InternetSemLimites.markdown.urls', namespace='markdown')),
-    url(r'^new/$', provider_new, name='new'),
-    url(r'^provider/(?P<pk>[\d]+)/$', provider_details, name='provider'),
+    path('', redirect_to_api, name='home'),
+    path('api/', include('InternetSemLimites.api.urls')),
+    path('markdown/', include('InternetSemLimites.markdown.urls')),
+    path('new/', provider_new, name='new'),
+    path('provider/<int:pk>/', provider_details, name='provider'),
+    path('admin/', admin.site.urls)
 ]

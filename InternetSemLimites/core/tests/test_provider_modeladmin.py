@@ -18,7 +18,7 @@ class TestProviderModelAdmin(TestCase):
                  'category': Provider.FAME,
                  'other': 'Lorem ipsum'}
         self.provider = Provider.objects.create(**props)
-        self.provider.coverage = [sc, go]
+        self.provider.coverage.set([sc, go])
         self.admin = ProviderModelAdmin(Provider, AdminSite())
 
     def test_states_field(self):

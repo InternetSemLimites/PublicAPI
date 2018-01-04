@@ -15,7 +15,7 @@ class TestGet(TestCase):
                  'other': 'Lorem ipsum',
                  'status': Provider.PUBLISHED}
         provider = Provider.objects.create(**props)
-        provider.coverage = [sc, go]
+        provider.coverage.set([sc, go])
         self.resp = self.client.get(resolve_url('api:shame'))
 
     def test_get(self):

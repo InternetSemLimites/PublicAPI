@@ -23,8 +23,8 @@ class TestGet(TestCase):
                         'status': Provider.REFUSED}
         provider_published = Provider.objects.create(**props_published)
         provider_refused = Provider.objects.create(**props_refused)
-        provider_published.coverage = [sc, go]
-        provider_refused.coverage = [sp]
+        provider_published.coverage.set([sc, go])
+        provider_refused.coverage.set([sp])
         self.resp = self.client.get(resolve_url('markdown:fame'))
 
     def test_get(self):

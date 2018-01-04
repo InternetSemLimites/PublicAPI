@@ -1,7 +1,12 @@
-from django.conf.urls import url
+from django.urls import path
+
 from InternetSemLimites.markdown.views import fame, shame
 
+
+app_name = 'markdown'
+
+
 urlpatterns = [
-    url(r'^README.md$', fame, name='fame'),
-    url(r'^HALL_OF_SHAME.md$', shame, name='shame'),
+    path('README.md', fame, name='fame'),
+    path('HALL_OF_SHAME.md', shame, name='shame'),
 ]
