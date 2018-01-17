@@ -7,7 +7,6 @@ python_version = "3.6"
 
 django = "*"
 dj-database-url = "*"
-django-cors-middleware = "*"
 django-extensions = "*"
 django-test-without-migrations = "*"
 gunicorn = "*"
@@ -15,6 +14,7 @@ gunicorn = "*"
 python-decouple = "*"
 pytz = "*"
 whitenoise = "*"
+django-cors-headers = "*"
 
 
 [dev-packages]
