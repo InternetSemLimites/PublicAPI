@@ -20,3 +20,4 @@ whitenoise = "*"
 [dev-packages]
 
 coverage = "*"
+tblib = "*"

@@ -12,7 +12,7 @@ before_script:
   - pipenv run python manage.py migrate
   - pipenv run python manage.py collectstatic --no-input
 script:
-  - pipenv run coverage run manage.py test -v 3
+  - pipenv run coverage run manage.py test --parallel
 after_success:
   - pipenv run coveralls
 addons:

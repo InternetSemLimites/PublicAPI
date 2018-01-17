@@ -99,7 +99,7 @@ pipenv run python manage.py collectstatic
 
 ### Ready?
 
-Not sure? Run `pipenv run python manage.py check` and `python manage.py test` just in case.
+Not sure? Run `pipenv run python manage.py check` and `pipenv run python manage.py test --parallel` just in case.
 
 ### Ready!
 
