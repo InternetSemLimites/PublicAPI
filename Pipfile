@@ -1,0 +1,23 @@
+[requires]
+
+python_version = "3.6"
+
+
+[packages]
+
+django = "*"
+dj-database-url = "*"
+django-cors-middleware = "*"
+django-extensions = "*"
+django-test-without-migrations = "*"
+gunicorn = "*"
+"psycopg2" = "*"
+python-decouple = "*"
+pytz = "*"
+whitenoise = "*"
+
+
+[dev-packages]
+
+coverage = "*"
+tblib = "*"

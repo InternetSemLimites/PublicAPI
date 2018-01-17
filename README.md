@@ -54,10 +54,10 @@ Anyone can suggest new providers using [our form](https://internetsemlimites.her
 
 ### Requirements
 
-The CMS is based in [Python](http://python.org) 3.6 and [Django](http://djangoproject.com). Once you have `pip` available, install the dependencies:
+The CMS is based in [Python](http://python.org) 3.6 and [Django](http://djangoproject.com). Once you have [`pipenv`](https://docs.pipenv.org/) available, install the dependencies:
 
 ```console
-python -m pip install -r requirements.txt
+pipenv install --dev
 ```
 
 ### Settings
@@ -85,8 +85,8 @@ Copy `contrib/.env.sample` as `.env` in the project's root folder and adjust you
 Once you're done with requirements, dependencies and settings, create the basic structure at the database and create a super-user for you:
 
 ```console
-python manage.py migrate
-python manage.py createsuperuser
+pipenv run python manage.py migrate
+pipenv run python manage.py createsuperuser
 ```
 
 ### Generate static files
@@ -94,15 +94,15 @@ python manage.py createsuperuser
 We serve static files through [WhiteNoise](http://whitenoise.evans.io), so depending on your configuration you might have to run:
 
 ```console
-python manage.py collectstatic
+pipenv run python manage.py collectstatic
 ```
 
 ### Ready?
 
-Not sure? Run `python manage.py check` and `python manage.py test` just in case.
+Not sure? Run `pipenv run python manage.py check` and `pipenv run python manage.py test --parallel` just in case.
 
 ### Ready!
 
-Run the server with `python manage.py runserver` and load [localhost:8000](http://localhost:8000) in your favorite browser.
+Run the server with `pipenv run python manage.py runserver` and load [localhost:8000](http://localhost:8000) in your favorite browser.
 
 If you created a _super-user_ account, you can also use [Django Admin](https://docs.djangoproject.com/en/stable/ref/contrib/admin/) at [`/admin/`](http://localhost:8000/admin/).
