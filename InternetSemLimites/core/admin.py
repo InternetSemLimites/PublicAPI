@@ -1,8 +1,18 @@
 from django.contrib import admin
+from import_export.resources import ModelResource
+from import_export.admin import ImportExportModelAdmin
+
 from InternetSemLimites.core.models import Provider
 
 
-class ProviderModelAdmin(admin.ModelAdmin):
+class ProviderResource(ModelResource):
+
+    class Meta:
+        model = Provider
+
+
+class ProviderModelAdmin(ImportExportModelAdmin):
+    resource_class = ProviderResource
     list_display = ('name', 'states', 'status', 'category', 'created_at', 'updated_at')
     actions = ['publish', 'unpublish', 'refuse', 'shame', 'fame']
     list_filter = ('status', 'moderation_reason', 'category', 'coverage', 'created_at', 'updated_at')

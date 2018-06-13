@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'test_without_migrations',
+    'import_export',
     'corsheaders',
     'InternetSemLimites.core.apps.CoreConfig',
     'InternetSemLimites.api',
