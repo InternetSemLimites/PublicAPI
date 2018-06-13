@@ -6,15 +6,14 @@ branches:
 python:
   - 3.6
 install:
-  - pip install pipenv
-  - pipenv install --dev
+  - pip install -r requirements.txt
 before_script:
-  - pipenv run python manage.py migrate
-  - pipenv run python manage.py collectstatic --no-input
+  - python manage.py migrate
+  - python manage.py collectstatic --no-input
 script:
-  - pipenv run coverage run manage.py test --parallel
+  - coverage run manage.py test --parallel
 after_success:
-  - pipenv run coveralls
+  - coveralls
 addons:
   code_climate:
     repo_token: c42dbb6e9c46bd32673908a66bb1c50908dd52040cb395a9ca375b153d971716
