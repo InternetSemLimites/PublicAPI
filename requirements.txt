@@ -9,5 +9,5 @@ gunicorn==19.8.1
 psycopg2==2.7.5
 python-decouple==3.1
 pytz==2018.5
-tblib
+tblib==1.3.2
 whitenoise==3.3.1
