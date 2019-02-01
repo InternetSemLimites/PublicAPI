@@ -1,0 +1,24 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+coverage = "*"
+tblib = "*"
+
+[packages]
+Django = "*"
+dj-database-url = "*"
+django-cors-headers = "*"
+django-extensions = "*"
+django-import-export = "*"
+django-test-without-migrations = "*"
+gunicorn = "*"
+psycopg2 = "*"
+python-decouple = "*"
+pytz = "*"
+whitenoise = "*"
+
+[requires]
+python_version = "3.6"
