@@ -2,7 +2,7 @@ coverage==4.5.2
 dj-database-url==0.5.0
 Django==2.1.5
 django-cors-headers==2.4.0
-django-extensions==2.1.4
+django-extensions==2.1.5
 django-import-export==1.1.0
 django-test-without-migrations==0.6
 gunicorn==19.9.0
